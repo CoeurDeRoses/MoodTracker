@@ -72,43 +72,43 @@ public class MoodManager extends AppCompatActivity {
         setMood_date(mood_date);
     }
 
-    public Set<String> mood_list_data()
-    {
-        Set<String> mood_list = new ArraySet<>();
-
-        mood_list.add(mood_name);
-        mood_list.add(mood_sentence);
-        mood_list.add(mood_color);
-        mood_list.add(mood_date);
-
-        return mood_list;
-    }
-
-    //Overload method for Json way
+    /**
+     * Method to prepare the strings for JSON format way
+     * when i extract data
+     * @return
+     */
     public String mood_list_data_gson_string()
     {
         String mood_list = "{";
 
-        mood_list += " \"mood_name\"     : \""+ mood_name+"\",";
-        mood_list += " \"mood_sentence\" : \""+ mood_sentence+"\",";
-        mood_list += " \"mood_color\"    : \""+ mood_color+"\",";
-        mood_list += " \"mood_date\"     : \""+ mood_date+"\"}";
+        mood_list += "\"mood_name\":\""+ mood_name+"\",";
+        mood_list += "\"mood_sentence\":\""+ mood_sentence+"\",";
+        mood_list += "\"mood_color\":\""+ mood_color+"\",";
+        mood_list += "\"mood_date\":\""+ mood_date+"\"}";
 
         return mood_list;
     }
 
+    /**
+     * This method format the string to make him able to be managed and for handle data
+     * to show them well in the mood history i delete many kind of char useless to show
+     * @param the_string
+     * @return
+     */
+    public String[] mood_ready_read(String the_string){
 
-    public List<String> mood_list_data_gson()
-    {
-        List<String> mood_list =  new ArrayList<>();
+        //Curly bracket deleted
+        the_string = the_string.replaceAll("\\{|\\}","");
+        //quote
+        the_string = the_string.replaceAll("\"","");
+        // i replace all the comma by ":" to make this character the split parameter to create an array
+        the_string = the_string.replaceAll(",",":");
+        //I split all the data and put them in an array
+        String[] the_array_string = the_string.split(":");
 
-        mood_list.add(mood_name);
-        mood_list.add(mood_sentence);
-        mood_list.add(mood_color);
-        mood_list.add(mood_date);
-
-        return mood_list;
+        return the_array_string;
     }
+
 
 
 

@@ -24,6 +24,8 @@ public class MHistoryMood extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mhistorymood);
 
+        MoodManager mood_manager = new MoodManager();
+
         // i make the link between variable and the component of history layout
         TextView t_yesterday = findViewById(R.id.mood_View),
                 t_2daysago = findViewById(R.id.mood_View2),
@@ -54,19 +56,12 @@ public class MHistoryMood extends AppCompatActivity {
         //Json way
         Gson gson = new Gson();
         String json_file = getSharedPreferences("mood_data_file_gson",MODE_PRIVATE).getString("mood_data_gson", "");
+        //i put all in a strng
         String many_gson = gson.fromJson(json_file, String.class);
+        // i make the string workable to manage data with method of MoodManager
+        String[] many_gson_array = mood_manager.mood_ready_read(many_gson);
 
-        // order of the method take order like this way: name - sentence - color - date
-        // after i take them from the file, order is reversed
-
-        // the rectangle of component must change and be relative to the moods
-        // More the mood is good more bigger the rectangle he is. And of course the background color
-        // must be associated to the mood i will use switch condition
-        //I  modify the property of the textView object with their method
-        //About the size,the yellow rectangle can stay as he is already but the other must change
-
-
-        t_4daysago.setText(many_gson);
+        t_4daysago.setText(many_gson_array[0]+" "+many_gson_array[1]);
 
 
     }
