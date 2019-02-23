@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">MoodTracker</string>
+    <string name="StringForAddCommentButton">This buttton is used to allow users to add comments about the mood of current day</string>
+    <string name="StringForMoodHistory">This button is used to allow the users to check the history mood of the lasts 7 days</string>
+    <string name="StringSuperHappy">Button about supper happy mood</string>
+    <string name="StringHappy">Button about happy mood</string>
+    <string name="StringNormal">This button is about normal mood</string>
+    <string name="StringDisappointed">This button is about Disappointed mood</string>
+    <string name="StringSad">This button is about sad mood</string>
+    <string name="StringExplainMoodReasonDialog">Expliquez la raison de votre humeur</string>
+    <string name="StringValider">VALIDER</string>
+    <string name="StringAnnuler">ANNULER</string>
+    <string name="mood_view">Hier</string>
+    <string name="moodview2">Avant hier</string>
+    <string name="moodview3">Il y\'a 3 jours</string>
+    <string name="moodview4">Il y\'a 4 jours</string>
+    <string name="textview5">Il y\'a 5 jours</string>
+    <string name="moodview6">Il y\'a 6 jours</string>
+    <string name="moodview7">Il y\'a 1 semaine</string>
+    <string name="Sharebutton">About share the mood with friends</string>
+</resources>

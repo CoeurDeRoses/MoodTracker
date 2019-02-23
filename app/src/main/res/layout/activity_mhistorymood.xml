@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#ACB9B7">
+
+        <TextView
+            android:id="@+id/mood_View7"
+            android:layout_width="match_parent"
+            android:layout_height="92dp"
+            android:textSize="25sp"
+            android:text="@string/moodview7" />
+
+        <TextView
+            android:id="@+id/mood_View6"
+            android:layout_width="match_parent"
+            android:layout_height="92dp"
+            android:textSize="25sp"
+            android:text="@string/moodview6" />
+
+    <TextView
+        android:id="@+id/mood_View5"
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        android:textSize="25sp"
+        android:text="@string/textview5" />
+
+    <TextView
+        android:id="@+id/mood_View4"
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        android:textSize="15sp"
+        android:text="@string/moodview4" />
+
+    <TextView
+        android:id="@+id/mood_View3"
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        android:textSize="25sp"
+        android:text="@string/moodview3" />
+
+    <TextView
+        android:id="@+id/mood_View2"
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        android:textSize="25sp"
+        android:text="@string/moodview2" />
+
+    <TextView
+        android:id="@+id/mood_View"
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        android:textSize="25sp"
+        android:text="@string/mood_view" />
+    </LinearLayout>

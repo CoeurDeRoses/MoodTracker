@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="608dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
+
+
+            <FrameLayout
+                android:layout_width="500dp"
+                android:layout_height="750dp"
+                android:background="#fff9ec4f">
+
+                <ImageButton
+                    android:id="@+id/buttonSuperHappy"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_marginStart="88dp"
+                    android:layout_marginTop="220dp"
+                    android:layout_marginBottom="200dp"
+                    android:background="@drawable/smiley_super_happy"
+                    android:contentDescription="@string/StringSuperHappy" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="500dp"
+                android:layout_height="750dp"
+                android:background="#ffb8e986">
+
+                <ImageButton
+                    android:id="@+id/buttonHappy"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_marginStart="88dp"
+                    android:layout_marginTop="220dp"
+                    android:layout_marginBottom="200dp"
+                    android:background="@drawable/smiley_happy"
+                    android:contentDescription="@string/StringHappy" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="500dp"
+                android:layout_height="750dp"
+                android:background="#a5468ad9">
+
+                <ImageButton
+                    android:id="@+id/buttonNormal"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_marginStart="88dp"
+                    android:layout_marginTop="220dp"
+                    android:layout_marginBottom="200dp"
+                    android:background="@drawable/smiley_normal"
+                    android:contentDescription="@string/StringNormal" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="500dp"
+                android:layout_height="750dp"
+                android:background="#ff9b9b9b">
+
+                <ImageButton
+                    android:id="@+id/buttonDisappointed"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_marginStart="88dp"
+                    android:layout_marginTop="220dp"
+                    android:layout_marginBottom="200dp"
+                    android:background="@drawable/smiley_disappointed"
+                    android:contentDescription="@string/StringDisappointed" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="500dp"
+                android:layout_height="750dp"
+                android:background="#ffde3c50">
+
+                <ImageButton
+                    android:id="@+id/buttonSad"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_marginStart="88dp"
+                    android:layout_marginTop="220dp"
+                    android:layout_marginBottom="200dp"
+                    android:background="@drawable/smiley_sad"
+                    android:contentDescription="@string/StringSad" />
+
+
+            </FrameLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageButton
+        android:id="@+id/ShareMood"
+        android:layout_width="68dp"
+        android:layout_height="68dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/share_mood"
+        android:contentDescription="@string/Sharebutton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.345"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+
+        android:id="@+id/GoHistory"
+        android:layout_width="68dp"
+        android:layout_height="68dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/ic_history_black"
+        android:contentDescription="@string/StringForMoodHistory"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/AddComment"
+        android:layout_width="68dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/ic_note_add_black"
+        android:contentDescription="@string/StringForAddCommentButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>
