@@ -105,6 +105,9 @@ public class MoodManager extends AppCompatActivity {
         the_string = the_string.replaceAll(",",":");
         //I split all the data and put them in an array
         String[] the_array_string = the_string.split(":");
+        // Data are recorded in the array in this way
+        // array[0] mood_name array[1] mood_name value. the exact same order of the data send by user after user select mood data
+        // and recorded in JSON file
 
         return the_array_string;
     }

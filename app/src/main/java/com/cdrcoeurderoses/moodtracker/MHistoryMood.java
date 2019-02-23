@@ -38,30 +38,24 @@ public class MHistoryMood extends AppCompatActivity {
         //to the components of the layout history. I put the name of the file i want data and i put the key needed
         //Here the component can now take the value from the file
 
-        //i create a SetString defaut value in order to respect the method getStringSet
-        Set<String> mood_list_defaut = new ArraySet<>();
-
-        mood_list_defaut.add("SanGoku");
-        mood_list_defaut.add("Vegeta");
-        mood_list_defaut.add("Broly");
-        mood_list_defaut.add("Jiren");
-
-        //Xml way
-        //Set<String> set_mood_list = getSharedPreferences("mood_data_file",MODE_PRIVATE).getStringSet("many_values",mood_list_defaut);
-
-        //Here is the way to how i handle the mood data to allow me to manage them in the layout component
-        //I convert all
-        //String many = set_mood_list.toString().replaceAll(","," ").replaceAll("\\[|\\]","");
 
         //Json way
         Gson gson = new Gson();
-        String json_file = getSharedPreferences("mood_data_file_gson",MODE_PRIVATE).getString("mood_data_gson", "");
+        String gson_file_read = getSharedPreferences("mood_file",MODE_PRIVATE).getString("1", "");
+        String gson_file_read_2 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("2", "");
+        String gson_file_read_3 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("3", "");
         //i put all in a strng
-        String many_gson = gson.fromJson(json_file, String.class);
+        String mood_data_json = gson.fromJson(gson_file_read, String.class);
+        String mood_data_json_2 = gson.fromJson(gson_file_read_2, String.class);
+        String mood_data_json_3 = gson.fromJson(gson_file_read_3, String.class);
         // i make the string workable to manage data with method of MoodManager
-        String[] many_gson_array = mood_manager.mood_ready_read(many_gson);
+        String[] many_gson_array = mood_manager.mood_ready_read(mood_data_json);
+        String[] many_gson_array_2 = mood_manager.mood_ready_read(mood_data_json_2);
+        String[] many_gson_array_3 = mood_manager.mood_ready_read(mood_data_json_3);
 
-        t_4daysago.setText(many_gson_array[0]+" "+many_gson_array[1]);
+        t_yesterday.setText(many_gson_array[0]+" "+many_gson_array[1]+" "+many_gson_array[7]);
+        t_2daysago.setText(many_gson_array_2[0]+" "+many_gson_array_2[1]+" "+many_gson_array_2[7]);
+        t_3daysago.setText(many_gson_array_3[0]+" "+many_gson_array_3[1]+" "+many_gson_array_3[7]);
 
 
     }

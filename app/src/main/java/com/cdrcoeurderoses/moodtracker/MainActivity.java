@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     //object mood created to prepare the record of data
 
 
-    final MoodManager mood_recorder = new MoodManager();
+    final MoodManager mood_manager = new MoodManager();
 
 
     private MediaPlayer playMusic;
@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"Ouverture des applications suggérés pour l'envoie",Toast.LENGTH_SHORT).show();
                         Intent sendIntent = new Intent();
                         sendIntent.setAction(Intent.ACTION_SEND);
-                        sendIntent.putExtra(Intent.EXTRA_TEXT,mood_recorder.mood_list_data_gson_string());
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, mood_manager.mood_list_data_gson_string());
                         sendIntent.setType("text/plain");
                         startActivity(sendIntent);
 
@@ -217,23 +217,39 @@ public class MainActivity extends AppCompatActivity {
                         //Date and SimpleDateFormat implemented to take and prepare the current date to be recorded
                         Date today = new Date();
                         mood_date = new SimpleDateFormat("ddMMyy");//the current date
+                        String string_mood_date= mood_date.format(today);
 
 
-                        mood_recorder.record_ManyData(mood_name,mood_setence,mood_Color,mood_date.format(today));
+                        mood_manager.record_ManyData(mood_name,mood_setence,mood_Color,mood_date.format(today));
                         /* Xml file way
                         SharedPreferences mood_file = getSharedPreferences("mood_data_file", MODE_PRIVATE);
                         SharedPreferences.Editor mood_Editor = mood_file.edit();
-                        mood_Editor.putStringSet("many_values",mood_recorder.mood_list_data()).apply();
+                        mood_Editor.putStringSet("many_values",mood_manager.mood_list_data()).apply();
                         */
 
                         //Json way
-                        SharedPreferences  mood_gson = getSharedPreferences("mood_data_file_gson", MODE_PRIVATE);
-                        SharedPreferences.Editor mood_gson_Editor = mood_gson.edit();
                         Gson gson_manager = new Gson();
-                        String mood_data_gson = gson_manager.toJson(mood_recorder.mood_list_data_gson_string());
-                        mood_gson_Editor.putString("mood_data_gson", mood_data_gson).apply();
+                        //for the file one
+                        SharedPreferences gson_file_write = getSharedPreferences("mood_file", MODE_PRIVATE);
+                        SharedPreferences.Editor mood_gson_Editor = gson_file_write.edit();
+                        String mood_data_gson = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
+                        mood_gson_Editor.putString("1", mood_data_gson).apply();
+                        mood_gson_Editor.putString("2", mood_data_gson).apply();
+                        mood_gson_Editor.putString("3", mood_data_gson).apply();
 
+                        //here is the code behavior to handle data about change date if we change the day
+                        // if we change the day the day i must switch the data contained to key 1 to the 2 and the
+                        // data of key 2 to the 3 and the same way for the rest
+                        if(string_mood_date != most_recent_date_recorded())
+                        {
+                            //i need to open a stream read data from the key one and put them in a string
+                            String gson_read_from_file_1 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("1", "");
+                            //i put all in a strng
+                            String mood_data_gson_2 = gson_manager.fromJson(gson_read_from_file_1, String.class);
+                            //and here a put the string in the key 2
+                            //mood_gson_Editor_2.putString("1", mood_data_gson_2).apply();
 
+                        }
                         //Message of confirmation
                         Toast.makeText(getApplicationContext(), "Donnée enregistré "+ mood_date.format(today)+" "+mood_Color+" "+mood_name, Toast.LENGTH_SHORT).show();
                     }
@@ -248,5 +264,21 @@ public class MainActivity extends AppCompatActivity {
                 alertMood.show();
             }
         });
+    }
+
+    /**
+     * this method return the most recent date of data recorded in order to check if we need to update if we change the date
+     * compare the most recent data and the date provide by the android system is enough for that
+     * @return
+     */
+    public String most_recent_date_recorded()
+    {
+        Gson gson = new Gson();
+        String gson_file_read = getSharedPreferences("mood_file",MODE_PRIVATE).getString("1", "");
+        //i put all in a strng
+        String mood_data_json = gson.fromJson(gson_file_read, String.class);
+        // i make the string workable to manage data with method of MoodManager
+        String[] many_gson_array = mood_manager.mood_ready_read(mood_data_json);
+        return  many_gson_array[7];
     }
 }
