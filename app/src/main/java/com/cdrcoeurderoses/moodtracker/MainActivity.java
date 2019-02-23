@@ -233,23 +233,45 @@ public class MainActivity extends AppCompatActivity {
                         SharedPreferences gson_file_write = getSharedPreferences("mood_file", MODE_PRIVATE);
                         SharedPreferences.Editor mood_gson_Editor = gson_file_write.edit();
                         String mood_data_gson = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
-                        mood_gson_Editor.putString("1", mood_data_gson).apply();
-                        mood_gson_Editor.putString("2", mood_data_gson).apply();
-                        mood_gson_Editor.putString("3", mood_data_gson).apply();
+
+
+                        if (!gson_file_write.contains("2")) {
+                            mood_gson_Editor.putString("2", mood_data_gson).apply();
+                        }
+                        //mood_gson_Editor.putString("3", mood_data_gson);
 
                         //here is the code behavior to handle data about change date if we change the day
                         // if we change the day the day i must switch the data contained to key 1 to the 2 and the
                         // data of key 2 to the 3 and the same way for the rest
                         if(string_mood_date != most_recent_date_recorded())
                         {
-                            //i need to open a stream read data from the key one and put them in a string
-                            String gson_read_from_file_1 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("1", "");
+                            // we must always start the process from the last-1 to the recent just before its data
+                            // and we repeat the same until the second
+                            /*String gson_read_from_key_2 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("2", "");
                             //i put all in a strng
-                            String mood_data_gson_2 = gson_manager.fromJson(gson_read_from_file_1, String.class);
-                            //and here a put the string in the key 2
-                            //mood_gson_Editor_2.putString("1", mood_data_gson_2).apply();
+                            String mood_data_gson_3 = gson_manager.fromJson(gson_read_from_key_2, String.class);
+                            mood_gson_Editor.putString("3",mood_data_gson_3).apply();*/
+
+                            String gson_read_from_key_1 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("1", "");
+                            //i put all in a strng
+
+                            String mood_data_gson_2 = gson_manager.fromJson(gson_read_from_key_1, String.class);
+                            //Prepare the data for record
+                            String[] many_gson_array = mood_manager.mood_ready_read(mood_data_gson_2);
+                            //next step
+                            mood_manager.record_ManyData(many_gson_array[1],many_gson_array[3],many_gson_array[5],many_gson_array[7]);
+                            // next
+                            mood_data_gson_2 = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
+                            //and record
+                            mood_gson_Editor.putString("2",mood_data_gson_2).apply();
+
 
                         }
+                        //always put the record instruction after the test or the old data of key one will be erased
+                        //and the key 2 will not take it but gonna take the new data as key
+                        mood_gson_Editor.putString("1", mood_data_gson).apply();
+
+
                         //Message of confirmation
                         Toast.makeText(getApplicationContext(), "Donnée enregistré "+ mood_date.format(today)+" "+mood_Color+" "+mood_name, Toast.LENGTH_SHORT).show();
                     }

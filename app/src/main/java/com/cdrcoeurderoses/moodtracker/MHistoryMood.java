@@ -43,19 +43,19 @@ public class MHistoryMood extends AppCompatActivity {
         Gson gson = new Gson();
         String gson_file_read = getSharedPreferences("mood_file",MODE_PRIVATE).getString("1", "");
         String gson_file_read_2 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("2", "");
-        String gson_file_read_3 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("3", "");
+        //String gson_file_read_3 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("3", "");
         //i put all in a strng
         String mood_data_json = gson.fromJson(gson_file_read, String.class);
         String mood_data_json_2 = gson.fromJson(gson_file_read_2, String.class);
-        String mood_data_json_3 = gson.fromJson(gson_file_read_3, String.class);
+       // String mood_data_json_3 = gson.fromJson(gson_file_read_3, String.class);
         // i make the string workable to manage data with method of MoodManager
         String[] many_gson_array = mood_manager.mood_ready_read(mood_data_json);
         String[] many_gson_array_2 = mood_manager.mood_ready_read(mood_data_json_2);
-        String[] many_gson_array_3 = mood_manager.mood_ready_read(mood_data_json_3);
+        //String[] many_gson_array_3 = mood_manager.mood_ready_read(mood_data_json_3);
 
         t_yesterday.setText(many_gson_array[0]+" "+many_gson_array[1]+" "+many_gson_array[7]);
         t_2daysago.setText(many_gson_array_2[0]+" "+many_gson_array_2[1]+" "+many_gson_array_2[7]);
-        t_3daysago.setText(many_gson_array_3[0]+" "+many_gson_array_3[1]+" "+many_gson_array_3[7]);
+        //t_3daysago.setText(many_gson_array_3[0]+" "+many_gson_array_3[1]+" "+many_gson_array_3[7]);
 
 
     }
