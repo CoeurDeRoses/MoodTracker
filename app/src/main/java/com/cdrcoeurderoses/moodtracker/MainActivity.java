@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     //To record the user choice i make a string variable which have to be put in each case
     // to receive the relative color mood_color and other userfull variable
     private String mood_name;
-    private String mood_sentence ="a comment";
+    private String mood_sentence;
     private String mood_Color;
     private SimpleDateFormat mood_date;
 
@@ -56,9 +56,11 @@ public class MainActivity extends AppCompatActivity {
         and returns the corresponding view
          */
         setContentView(R.layout.activity_main);
-        launcher_mood_data();
+        //launcher_mood_data();
         // I create the ImageButton needed to switch to history page
         ImageButton goHistory =  findViewById(R.id.GoHistory);
+
+        launcher_mood_data();
 
         // I call the method setOnClickListener to describe what happen when we press Gohistory button
         // Listener object contain a method which will be call when event happen
@@ -261,7 +263,17 @@ public class MainActivity extends AppCompatActivity {
         String string_mood_date= mood_date.format(today);
 
 
+
+        //Here i determinate if it's the first time some start app and we have no value
+        //i make the condition in the MHistoryActivity code wrong to not execute setbackground and setText
+        // and let the backgroung of each rectangle normal
+        //to find if it's the first time i check if we have the key 1 recorder
+        //if not the rectange stay normal but if
+        if(!getSharedPreferences("mood_file", MODE_PRIVATE).contains("1"))
+            mood_name="first_launch_application";
+
         mood_manager.record_ManyData(mood_name, mood_sentence,mood_Color,string_mood_date);
+
                         /* Xml file way
                         SharedPreferences mood_file = getSharedPreferences("mood_data_file", MODE_PRIVATE);
                         SharedPreferences.Editor mood_Editor = mood_file.edit();

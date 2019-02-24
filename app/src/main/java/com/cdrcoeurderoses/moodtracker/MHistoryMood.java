@@ -40,57 +40,74 @@ public class MHistoryMood extends AppCompatActivity {
         //Here the component can now take the value from the file
 
 
-        //Json way and deserealisation
         Gson gson = new Gson();
         String gson_file_read = getSharedPreferences("mood_file",MODE_PRIVATE).getString("1", "");
-        String gson_file_read_2 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("2", "");
-        String gson_file_read_3 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("3", "");
-        String gson_file_read_4 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("4", "");
-        String gson_file_read_5 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("5", "");
-        String gson_file_read_6 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("6", "");
-        String gson_file_read_7 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("7", "");
-
-
-        //i put all in a string
         String mood_data_json = gson.fromJson(gson_file_read, String.class);
-        String mood_data_json_2 = gson.fromJson(gson_file_read_2, String.class);
-        String mood_data_json_3 = gson.fromJson(gson_file_read_3, String.class);
-        String mood_data_json_4 = gson.fromJson(gson_file_read_4, String.class);
-        String mood_data_json_5 = gson.fromJson(gson_file_read_5, String.class);
-        String mood_data_json_6 = gson.fromJson(gson_file_read_6, String.class);
-        String mood_data_json_7 = gson.fromJson(gson_file_read_7, String.class);
-
-        // i make the string workable to manage data with method of MoodManager
         String[] many_gson_array = mood_manager.mood_ready_read(mood_data_json);
+
+        if(!many_gson_array[1].contentEquals("first_launch_application")) {
+            t_yesterday.setText("Hier");
+
+            t_yesterday.setBackgroundColor(mood_rectangle_color(many_gson_array[5]));
+        }
+
+
+
+        String gson_file_read_2 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("2", "");
+        String mood_data_json_2 = gson.fromJson(gson_file_read_2, String.class);
         String[] many_gson_array_2 = mood_manager.mood_ready_read(mood_data_json_2);
+
+        if(!many_gson_array_2[1].contentEquals("first_launch_application")) {
+            t_2daysago.setText("Avant hier");
+            t_2daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_2[5]));
+        }
+
+
+        String gson_file_read_3 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("3", "");
+        String mood_data_json_3 = gson.fromJson(gson_file_read_3, String.class);
         String[] many_gson_array_3 = mood_manager.mood_ready_read(mood_data_json_3);
+
+        if(!many_gson_array_3[1].contentEquals("first_launch_application")) {
+            t_3daysago.setText("Il y'a 3 jours");
+            t_3daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_3[5]));
+        }
+
+        String gson_file_read_4 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("4", "");
+        String mood_data_json_4 = gson.fromJson(gson_file_read_4, String.class);
         String[] many_gson_array_4 = mood_manager.mood_ready_read(mood_data_json_4);
+
+        if(!many_gson_array_4[1].contentEquals("first_launch_application")) {
+            t_4daysago.setText("Il y'a 4 jours");
+            t_4daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_4[5]));
+        }
+
+        String gson_file_read_5 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("5", "");
+        String mood_data_json_5 = gson.fromJson(gson_file_read_5, String.class);
         String[] many_gson_array_5 = mood_manager.mood_ready_read(mood_data_json_5);
+
+        if(!many_gson_array_5[1].contentEquals("first_launch_application")) {
+            t_5daysago.setText("Il y'a 5 jours");
+            t_5daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_5[5]));
+        }
+
+        String gson_file_read_6 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("6", "");
+        String mood_data_json_6 = gson.fromJson(gson_file_read_6, String.class);
         String[] many_gson_array_6 = mood_manager.mood_ready_read(mood_data_json_6);
+
+        if(!many_gson_array_6[1].contentEquals("first_launch_application")) {
+            t_6daysago.setText("Il y'a 6 jours");
+            t_6daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_6[5]));
+        }
+
+
+        String gson_file_read_7 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("7", "");
+        String mood_data_json_7 = gson.fromJson(gson_file_read_7, String.class);
         String[] many_gson_array_7 = mood_manager.mood_ready_read(mood_data_json_7);
 
-        //and i show them
-        t_yesterday.setText(many_gson_array[3]+" "+many_gson_array[1]+" "+many_gson_array[7]);
-        t_yesterday.setBackgroundColor(mood_rectangle_color(many_gson_array[5]));
-
-        t_2daysago.setText(many_gson_array_2[3]+" "+many_gson_array_2[1]+" "+many_gson_array_2[7]);
-        t_2daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_2[5]));
-
-        t_3daysago.setText(many_gson_array_3[3]+" "+many_gson_array_3[1]+" "+many_gson_array_3[7]);
-        t_3daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_3[5]));
-
-        t_4daysago.setText(many_gson_array_4[3]+" "+many_gson_array_4[1]+" "+many_gson_array_4[7]);
-        t_4daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_4[5]));
-
-        t_5daysago.setText(many_gson_array_5[3]+" "+many_gson_array_5[1]+" "+many_gson_array_5[7]);
-        t_5daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_5[5]));
-
-        t_6daysago.setText(many_gson_array_6[3]+" "+many_gson_array_6[1]+" "+many_gson_array_6[7]);
-        t_6daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_6[5]));
-
-        t_1weekago.setText(many_gson_array_7[3]+" "+many_gson_array_7[1]+" "+many_gson_array_7[7]);
-        t_1weekago.setBackgroundColor(mood_rectangle_color(many_gson_array_7[5]));
-
+        if(!many_gson_array_7[1].contentEquals("first_launch_application")) {
+            t_1weekago.setText("Il y'a une semaine");
+            t_1weekago.setBackgroundColor(mood_rectangle_color(many_gson_array_7[5]));
+        }
 
     }
 

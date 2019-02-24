@@ -10,12 +10,12 @@
     <string name="StringExplainMoodReasonDialog">Expliquez la raison de votre humeur</string>
     <string name="StringValider">VALIDER</string>
     <string name="StringAnnuler">ANNULER</string>
-    <string name="mood_view">Hier</string>
-    <string name="moodview2">Avant hier</string>
-    <string name="moodview3">Il y\'a 3 jours</string>
-    <string name="moodview4">Il y\'a 4 jours</string>
-    <string name="textview5">Il y\'a 5 jours</string>
-    <string name="moodview6">Il y\'a 6 jours</string>
-    <string name="moodview7">Il y\'a 1 semaine</string>
+    <string name="mood_view">1</string>
+    <string name="moodview2">2</string>
+    <string name="moodview3">3</string>
+    <string name="moodview4">4</string>
+    <string name="textview5">5</string>
+    <string name="moodview6">6</string>
+    <string name="moodview7">7</string>
     <string name="Sharebutton">About share the mood with friends</string>
 </resources>
