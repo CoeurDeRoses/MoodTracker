@@ -9,7 +9,7 @@
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
-        android:layout_height="608dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,15 +24,16 @@
 
 
             <FrameLayout
-                android:layout_width="500dp"
-                android:layout_height="750dp"
-                android:background="#fff9ec4f">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff9ec4f"
+                android:layout_gravity="center_vertical">
 
                 <ImageButton
                     android:id="@+id/buttonSuperHappy"
                     android:layout_width="250dp"
                     android:layout_height="250dp"
-                    android:layout_marginStart="88dp"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginTop="220dp"
                     android:layout_marginBottom="200dp"
                     android:background="@drawable/smiley_super_happy"
@@ -41,15 +42,15 @@
             </FrameLayout>
 
             <FrameLayout
-                android:layout_width="500dp"
-                android:layout_height="750dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="#ffb8e986">
 
                 <ImageButton
                     android:id="@+id/buttonHappy"
                     android:layout_width="250dp"
                     android:layout_height="250dp"
-                    android:layout_marginStart="88dp"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginTop="220dp"
                     android:layout_marginBottom="200dp"
                     android:background="@drawable/smiley_happy"
@@ -57,15 +58,15 @@
             </FrameLayout>
 
             <FrameLayout
-                android:layout_width="500dp"
-                android:layout_height="750dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="#a5468ad9">
 
                 <ImageButton
                     android:id="@+id/buttonNormal"
                     android:layout_width="250dp"
                     android:layout_height="250dp"
-                    android:layout_marginStart="88dp"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginTop="220dp"
                     android:layout_marginBottom="200dp"
                     android:background="@drawable/smiley_normal"
@@ -73,15 +74,15 @@
             </FrameLayout>
 
             <FrameLayout
-                android:layout_width="500dp"
-                android:layout_height="750dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="#ff9b9b9b">
 
                 <ImageButton
                     android:id="@+id/buttonDisappointed"
                     android:layout_width="250dp"
                     android:layout_height="250dp"
-                    android:layout_marginStart="88dp"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginTop="220dp"
                     android:layout_marginBottom="200dp"
                     android:background="@drawable/smiley_disappointed"
@@ -89,15 +90,15 @@
             </FrameLayout>
 
             <FrameLayout
-                android:layout_width="500dp"
-                android:layout_height="750dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="#ffde3c50">
 
                 <ImageButton
                     android:id="@+id/buttonSad"
                     android:layout_width="250dp"
                     android:layout_height="250dp"
-                    android:layout_marginStart="88dp"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginTop="220dp"
                     android:layout_marginBottom="200dp"
                     android:background="@drawable/smiley_sad"
