@@ -94,6 +94,11 @@ public class MHistoryMood extends AppCompatActivity {
 
     }
 
+    /**
+     * The methdd to set the right color to the rectangle
+     * @param Hexadecimal_color
+     * @return
+     */
     public int mood_rectangle_color(String Hexadecimal_color)
     {
         int mood_color = 0;
@@ -111,7 +116,7 @@ public class MHistoryMood extends AppCompatActivity {
             case "#6B6C6F": //Grey color
                 mood_color = Color.parseColor(Hexadecimal_color);break;
 
-            case "#D12A2B": //Yellow color
+            case "#D12A2B": //Red color
                 mood_color = Color.parseColor(Hexadecimal_color);break;
 
             default: //Yellow color
@@ -119,5 +124,30 @@ public class MHistoryMood extends AppCompatActivity {
         }
 
         return mood_color;
+    }
+
+    /**
+     * The method which set the right weight to the rectangle
+     * no need to modify yellow mood, always at full weight
+     * @param Hexadecimal_color
+     * @return
+     */
+    public String mood_DP(String Hexadecimal_color)
+    {
+
+        String mood_dp="";
+        if(Hexadecimal_color=="#65D164")
+            mood_dp="200dp";
+
+        if(Hexadecimal_color=="#2663EE")
+            mood_dp="150dp";
+
+        if(Hexadecimal_color=="#6B6C6F")
+            mood_dp="100dp";
+
+        if(Hexadecimal_color=="#D12A2B")
+            mood_dp="50dp";
+
+        return mood_dp;
     }
 }

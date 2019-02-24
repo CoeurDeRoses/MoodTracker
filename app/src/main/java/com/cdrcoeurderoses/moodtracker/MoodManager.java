@@ -12,13 +12,13 @@ import java.util.Set;
 public class MoodManager extends AppCompatActivity {
     //this class handle all the property and method about the mood
 
-    private String mood_name;
-    private String mood_sentence;
+    private String mood_name="";
+    private String mood_sentence="";
     // i use the hexadecimal value to choose the right color and i will convert the value with the parse method
     // later in MHistoryMood class cause the setBackground method of a component accept only int value so the get method of color
     // will return an int value
-    private String mood_color;
-    private String mood_date;
+    private String mood_color="";
+    private String mood_date="";
 
 
     public MoodManager(){

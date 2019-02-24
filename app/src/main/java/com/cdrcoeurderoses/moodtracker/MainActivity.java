@@ -31,12 +31,14 @@ public class MainActivity extends AppCompatActivity {
     final MoodManager mood_manager = new MoodManager();
 
 
+
+
     private MediaPlayer playMusic;
 
     //To record the user choice i make a string variable which have to be put in each case
     // to receive the relative color mood_color and other userfull variable
     private String mood_name;
-    private String mood_setence="a comment";
+    private String mood_sentence ="a comment";
     private String mood_Color;
     private SimpleDateFormat mood_date;
 
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         and returns the corresponding view
          */
         setContentView(R.layout.activity_main);
+        launcher_mood_data();
         // I create the ImageButton needed to switch to history page
         ImageButton goHistory =  findViewById(R.id.GoHistory);
 
@@ -76,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
         ImageButton btSuperHappy = findViewById(R.id.buttonSuperHappy); ImageButton btHappy = findViewById(R.id.buttonHappy);
         ImageButton btNormal = findViewById(R.id.buttonNormal); ImageButton btDisappointed = findViewById(R.id.buttonDisappointed);
         ImageButton btSad = findViewById(R.id.buttonSad);
+
+
 
         //For very happy mood
         alertDialogMood(btSuperHappy,"Etes vous vraiment de très bonne humeur ?");
@@ -101,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         //No need to use the setPositive or Negative method, cause i created my customized method
                         // with my customized buttons
-                        mood_setence = dialogAddComment.getEtComment().getText().toString();
+                        mood_sentence = dialogAddComment.getEtComment().getText().toString();
                         Toast.makeText(getApplicationContext(),"Commentaire enregistré",Toast.LENGTH_SHORT).show();
                         //I use cancel() method from dialog class to close the dialog box after a choice
 
@@ -206,166 +211,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        //and here i create the variable to manage date input in the file by using method of a
-                        //SharedPreferences object, first of all i put the name of the xml file
-                        //and put MOVE_PRIVATE to make sure the data can be accessed only by MoodTracker application
-                        // and not outside.
-                        //The Editor object will be used to write data in the file
-                        //first parameter is the key and second is the value
-
-
-                        //Date and SimpleDateFormat implemented to take and prepare the current date to be recorded
-                        Date today = new Date();
-                        mood_date = new SimpleDateFormat("ddMMyy");//the current date
-                        String string_mood_date= mood_date.format(today);
-
-
-                        mood_manager.record_ManyData(mood_name,mood_setence,mood_Color,string_mood_date);
-                        /* Xml file way
-                        SharedPreferences mood_file = getSharedPreferences("mood_data_file", MODE_PRIVATE);
-                        SharedPreferences.Editor mood_Editor = mood_file.edit();
-                        mood_Editor.putStringSet("many_values",mood_manager.mood_list_data()).apply();
-                        */
-
-                        //Json way
-                        Gson gson_manager = new Gson();
-                        //for the file one
-                        SharedPreferences gson_file_write = getSharedPreferences("mood_file", MODE_PRIVATE);
-                        SharedPreferences.Editor mood_gson_Editor = gson_file_write.edit();
-                        String mood_data_gson = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
-
-
-                        // i test if the keys don't exist i don't initialise them
-                        if (!gson_file_write.contains("2")) {
-                            mood_gson_Editor.putString("2", mood_data_gson).apply();
-                        }
-                        if (!gson_file_write.contains("3")) {
-                            mood_gson_Editor.putString("3", mood_data_gson).apply();
-                        }
-
-                        if (!gson_file_write.contains("4")) {
-                            mood_gson_Editor.putString("4", mood_data_gson).apply();
-                        }
-                        if (!gson_file_write.contains("5")) {
-                            mood_gson_Editor.putString("5", mood_data_gson).apply();
-                        }
-                        if (!gson_file_write.contains("5")) {
-                            mood_gson_Editor.putString("5", mood_data_gson).apply();
-                        }
-                        if (!gson_file_write.contains("6")) {
-                            mood_gson_Editor.putString("6", mood_data_gson).apply();
-                        }
-
-                        if (!gson_file_write.contains("7")) {
-                            mood_gson_Editor.putString("7", mood_data_gson).apply();
-                        }
-
-                        //here is the code behavior to handle data about change date if we change the day
-                        // if we change the day the day i must switch the data contained to key 1 to the 2 and the
-                        // data of key 2 to the 3 and the same way for the rest
-                        if(!string_mood_date.contentEquals(most_recent_date_recorded()))
-                          {
-                            Toast.makeText(getApplicationContext(), "Donnée non enregistré " + most_recent_date_recorded()+" AND "+string_mood_date, Toast.LENGTH_LONG).show();
-                            // we must always start the process from the last-1 to the recent just before its data
-                            // and we repeat the same until the second i also code the derealisation process first and
-                            // the serealisation process after
-
-                            // Take data from key 6 and put them and key 7 ----------------------------
-                                String gson_read_from_key_6 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("6", "");
-                                //i put all in a strng
-
-                                String mood_data_gson_7 = gson_manager.fromJson(gson_read_from_key_6, String.class);
-                                //Prepare the data for record
-                                String[] many_gson_array_7 = mood_manager.mood_ready_read(mood_data_gson_7);
-                                //next step
-                                mood_manager.record_ManyData(many_gson_array_7[1],many_gson_array_7[3],many_gson_array_7[5],many_gson_array_7[7]);
-                                // next
-                                mood_data_gson_7 = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
-                                //and record
-                                mood_gson_Editor.putString("7",mood_data_gson_7).apply();
-
-                            // Take data from key 5 and put them and key 6 ----------------------------
-
-                                    String gson_read_from_key_5 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("5", "");
-                                    //i put all in a strng
-                                    String mood_data_gson_6 = gson_manager.fromJson(gson_read_from_key_5, String.class);
-                                    //Prepare the data for record
-                                    String[] many_gson_array_6 = mood_manager.mood_ready_read(mood_data_gson_6);
-                                    //next step
-                                    mood_manager.record_ManyData(many_gson_array_6[1],many_gson_array_6[3],many_gson_array_6[5],many_gson_array_6[7]);
-                                    // next
-                                    mood_data_gson_6 = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
-                                    //and record
-                                    mood_gson_Editor.putString("6",mood_data_gson_6).apply();
-
-                            // Take data from key 4 and put them and key 5 ----------------------------
-                                String gson_read_from_key_4 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("4", "");
-
-                                String mood_data_gson_5 = gson_manager.fromJson(gson_read_from_key_4, String.class);
-                                //Prepare the data for record
-                                String[] many_gson_array_5 = mood_manager.mood_ready_read(mood_data_gson_5);
-                                //next step
-                                mood_manager.record_ManyData(many_gson_array_5[1],many_gson_array_5[3],many_gson_array_5[5],many_gson_array_5[7]);
-                                // next
-                                mood_data_gson_5 = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
-                                //and record
-                                mood_gson_Editor.putString("5",mood_data_gson_5).apply();
-
-
-                            // Take data from key 3 and put them and key 4 ----------------------------
-
-                                String gson_read_from_key_3 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("3", "");
-                                //i put all in a strng
-
-                                String mood_data_gson_4 = gson_manager.fromJson(gson_read_from_key_3, String.class);
-                                //Prepare the data for record
-                                String[] many_gson_array_4 = mood_manager.mood_ready_read(mood_data_gson_4);
-                                //next step
-                                mood_manager.record_ManyData(many_gson_array_4[1],many_gson_array_4[3],many_gson_array_4[5],many_gson_array_4[7]);
-                                // next
-                                mood_data_gson_4 = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
-                                //and record
-                                mood_gson_Editor.putString("4",mood_data_gson_4).apply();
-
-
-                            // Take data from key 2 and put them and key 3 ----------------------------
-
-                                String gson_read_from_key_2 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("2", "");
-                                //i put all in a strng
-
-                                String mood_data_gson_3 = gson_manager.fromJson(gson_read_from_key_2, String.class);
-                                //Prepare the data for record
-                                String[] many_gson_array_3 = mood_manager.mood_ready_read(mood_data_gson_3);
-                                //next step
-                                mood_manager.record_ManyData(many_gson_array_3[1],many_gson_array_3[3],many_gson_array_3[5],many_gson_array_3[7]);
-                                // next
-                                mood_data_gson_3 = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
-                                //and record
-                                mood_gson_Editor.putString("3",mood_data_gson_3).apply();
-
-
-                            // Take data from key 1 and put them and key 2 ----------------------------
-
-                                String gson_read_from_key_1 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("1", "");
-                                //i put all in a strng
-
-                                String mood_data_gson_2 = gson_manager.fromJson(gson_read_from_key_1, String.class);
-                                //Prepare the data for record
-                                String[] many_gson_array_2 = mood_manager.mood_ready_read(mood_data_gson_2);
-                                //next step
-                                mood_manager.record_ManyData(many_gson_array_2[1],many_gson_array_2[3],many_gson_array_2[5],many_gson_array_2[7]);
-                                // next
-                                mood_data_gson_2 = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
-                                //and record
-                                mood_gson_Editor.putString("2",mood_data_gson_2).apply();
-
-
-                        }
-                        //always put the record instruction after the test or the old data of key one will be erased
-                        //and the key 2 will not take it but gonna take the new data as key
-                        mood_gson_Editor.putString("1", mood_data_gson).apply();
-
-
+                        launcher_mood_data();
                         //Message of confirmation
                         //Toast.makeText(getApplicationContext(), "Donnée enregistré ", Toast.LENGTH_SHORT).show();
                     }
@@ -397,5 +243,169 @@ public class MainActivity extends AppCompatActivity {
         String[] many_gson_array = mood_manager.mood_ready_read(mood_data_json);
        // Toast.makeText(getApplicationContext(), "Donnée non enregistré " + many_gson_array[7], Toast.LENGTH_LONG).show();
         return  many_gson_array[7];
+    }
+
+    public void launcher_mood_data()
+    {
+        //and here i create the variable to manage date input in the file by using method of a
+        //SharedPreferences object, first of all i put the name of the xml file
+        //and put MOVE_PRIVATE to make sure the data can be accessed only by MoodTracker application
+        // and not outside.
+        //The Editor object will be used to write data in the file
+        //first parameter is the key and second is the value
+
+
+        //Date and SimpleDateFormat implemented to take and prepare the current date to be recorded
+        Date today = new Date();
+        mood_date = new SimpleDateFormat("ddMMyy");//the current date
+        String string_mood_date= mood_date.format(today);
+
+
+        mood_manager.record_ManyData(mood_name, mood_sentence,mood_Color,string_mood_date);
+                        /* Xml file way
+                        SharedPreferences mood_file = getSharedPreferences("mood_data_file", MODE_PRIVATE);
+                        SharedPreferences.Editor mood_Editor = mood_file.edit();
+                        mood_Editor.putStringSet("many_values",mood_manager.mood_list_data()).apply();
+                        */
+
+        //Json way
+        Gson gson_manager = new Gson();
+        //for the file one
+        SharedPreferences gson_file_write = getSharedPreferences("mood_file", MODE_PRIVATE);
+        SharedPreferences.Editor mood_gson_Editor = gson_file_write.edit();
+        String mood_data_gson = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
+
+
+        // i test if the keys don't exist i don't initialise them
+        if (!gson_file_write.contains("1")) {
+            mood_gson_Editor.putString("1", mood_data_gson).apply();
+        }
+        if (!gson_file_write.contains("2")) {
+            mood_gson_Editor.putString("2", mood_data_gson).apply();
+        }
+        if (!gson_file_write.contains("3")) {
+            mood_gson_Editor.putString("3", mood_data_gson).apply();
+        }
+
+        if (!gson_file_write.contains("4")) {
+            mood_gson_Editor.putString("4", mood_data_gson).apply();
+        }
+        if (!gson_file_write.contains("5")) {
+            mood_gson_Editor.putString("5", mood_data_gson).apply();
+        }
+        if (!gson_file_write.contains("5")) {
+            mood_gson_Editor.putString("5", mood_data_gson).apply();
+        }
+        if (!gson_file_write.contains("6")) {
+            mood_gson_Editor.putString("6", mood_data_gson).apply();
+        }
+
+        if (!gson_file_write.contains("7")) {
+            mood_gson_Editor.putString("7", mood_data_gson).apply();
+        }
+        //here is the code behavior to handle data about change date if we change the day
+        // if we change the day the day i must switch the data contained to key 1 to the 2 and the
+        // data of key 2 to the 3 and the same way for the rest
+        if(!string_mood_date.contentEquals(most_recent_date_recorded()))
+        {
+            Toast.makeText(getApplicationContext(), "Comparaison date " + most_recent_date_recorded()+" AND "+string_mood_date, Toast.LENGTH_LONG).show();
+            // we must always start the process from the last-1 to the recent just before its data
+            // and we repeat the same until the second i also code the derealisation process first and
+            // the serealisation process after
+
+            // Take data from key 6 and put them and key 7 ----------------------------
+            String gson_read_from_key_6 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("6", "");
+            //i put all in a strng
+
+            String mood_data_gson_7 = gson_manager.fromJson(gson_read_from_key_6, String.class);
+            //Prepare the data for record
+            String[] many_gson_array_7 = mood_manager.mood_ready_read(mood_data_gson_7);
+            //next step
+            mood_manager.record_ManyData(many_gson_array_7[1],many_gson_array_7[3],many_gson_array_7[5],many_gson_array_7[7]);
+            // next
+            mood_data_gson_7 = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
+            //and record
+            mood_gson_Editor.putString("7",mood_data_gson_7).apply();
+
+            // Take data from key 5 and put them and key 6 ----------------------------
+
+            String gson_read_from_key_5 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("5", "");
+            //i put all in a strng
+            String mood_data_gson_6 = gson_manager.fromJson(gson_read_from_key_5, String.class);
+            //Prepare the data for record
+            String[] many_gson_array_6 = mood_manager.mood_ready_read(mood_data_gson_6);
+            //next step
+            mood_manager.record_ManyData(many_gson_array_6[1],many_gson_array_6[3],many_gson_array_6[5],many_gson_array_6[7]);
+            // next
+            mood_data_gson_6 = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
+            //and record
+            mood_gson_Editor.putString("6",mood_data_gson_6).apply();
+
+            // Take data from key 4 and put them and key 5 ----------------------------
+            String gson_read_from_key_4 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("4", "");
+
+            String mood_data_gson_5 = gson_manager.fromJson(gson_read_from_key_4, String.class);
+            //Prepare the data for record
+            String[] many_gson_array_5 = mood_manager.mood_ready_read(mood_data_gson_5);
+            //next step
+            mood_manager.record_ManyData(many_gson_array_5[1],many_gson_array_5[3],many_gson_array_5[5],many_gson_array_5[7]);
+            // next
+            mood_data_gson_5 = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
+            //and record
+            mood_gson_Editor.putString("5",mood_data_gson_5).apply();
+
+
+            // Take data from key 3 and put them and key 4 ----------------------------
+
+            String gson_read_from_key_3 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("3", "");
+            //i put all in a strng
+
+            String mood_data_gson_4 = gson_manager.fromJson(gson_read_from_key_3, String.class);
+            //Prepare the data for record
+            String[] many_gson_array_4 = mood_manager.mood_ready_read(mood_data_gson_4);
+            //next step
+            mood_manager.record_ManyData(many_gson_array_4[1],many_gson_array_4[3],many_gson_array_4[5],many_gson_array_4[7]);
+            // next
+            mood_data_gson_4 = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
+            //and record
+            mood_gson_Editor.putString("4",mood_data_gson_4).apply();
+
+
+            // Take data from key 2 and put them and key 3 ----------------------------
+
+            String gson_read_from_key_2 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("2", "");
+            //i put all in a strng
+
+            String mood_data_gson_3 = gson_manager.fromJson(gson_read_from_key_2, String.class);
+            //Prepare the data for record
+            String[] many_gson_array_3 = mood_manager.mood_ready_read(mood_data_gson_3);
+            //next step
+            mood_manager.record_ManyData(many_gson_array_3[1],many_gson_array_3[3],many_gson_array_3[5],many_gson_array_3[7]);
+            // next
+            mood_data_gson_3 = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
+            //and record
+            mood_gson_Editor.putString("3",mood_data_gson_3).apply();
+
+
+            // Take data from key 1 and put them and key 2 ----------------------------
+
+            String gson_read_from_key_1 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("1", "");
+            //i put all in a strng
+
+            String mood_data_gson_2 = gson_manager.fromJson(gson_read_from_key_1, String.class);
+            //Prepare the data for record
+            String[] many_gson_array_2 = mood_manager.mood_ready_read(mood_data_gson_2);
+            //next step
+            mood_manager.record_ManyData(many_gson_array_2[1],many_gson_array_2[3],many_gson_array_2[5],many_gson_array_2[7]);
+            // next
+            mood_data_gson_2 = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
+            //and record
+            mood_gson_Editor.putString("2",mood_data_gson_2).apply();
+
+
+        }
+        //always put the record instruction after the test or the old data of key one will be erased
+        //and the key 2 will not take it but gonna take the new data as key
+        mood_gson_Editor.putString("1", mood_data_gson).apply();
     }
 }
