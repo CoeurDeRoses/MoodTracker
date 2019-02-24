@@ -215,14 +215,14 @@ public class MainActivity extends AppCompatActivity {
 
                         launcher_mood_data();
                         //Message of confirmation
-                        //Toast.makeText(getApplicationContext(), "Donnée enregistré ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Données enregistré ", Toast.LENGTH_SHORT).show();
                     }
                 });
                 alertMood.setNegativeButton("NON", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //Message of cancellation
-                        //Toast.makeText(getApplicationContext(), "Donnée non enregistré", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Données non enregistré", Toast.LENGTH_SHORT).show();
                     }
                 });
                 alertMood.show();
@@ -269,9 +269,9 @@ public class MainActivity extends AppCompatActivity {
         // and let the backgroung of each rectangle normal
         //to find if it's the first time i check if we have the key 1 recorder
         //if not the rectange stay normal but if
-        if(!getSharedPreferences("mood_file", MODE_PRIVATE).contains("1"))
-            mood_name="first_launch_application";
-
+        if(!getSharedPreferences("mood_file", MODE_PRIVATE).contains("1")) {
+            mood_name = "first_launch_application";
+        }
         mood_manager.record_ManyData(mood_name, mood_sentence,mood_Color,string_mood_date);
 
                         /* Xml file way
