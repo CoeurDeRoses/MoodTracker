@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="piechart_button" type="id">piechartbutton</item>
+	<item name="mood_View_2" type="id">mood_View_2</item>
+	<item name="mood_View_3" type="id">mood_View_3</item>
+	<item name="mood_View_4" type="id">mood_View_4</item>
+	<item name="mood_View_5" type="id">mood_View_5</item>
+	<item name="mood_View_6" type="id">mood_View_6</item>
+	<item name="mood_View_7" type="id">mood_View_7</item>
+	<item name="show_comm" type="id">show_comm</item>
+	<item name="show_comm_2" type="id">show_comm_2</item>
+	<item name="show_comm_3" type="id">show_comm_3</item>
+	<item name="show_comm_4" type="id">show_comm_4</item>
+	<item name="show_comm_5" type="id">show_comm_5</item>
+	<item name="show_comm_6" type="id">show_comm_6</item>
+	<item name="show_comm_7" type="id">show_comm_7</item>
+</resources>

@@ -40,7 +40,7 @@
                     tools:layout_editor_absoluteY="26dp" />
 
                 <TextView
-                    android:id="@+id/mood_View7"
+                    android:id="@+id/mood_View_7"
                     android:layout_width="match_parent"
                     android:layout_height="104dp"
                     android:textSize="20sp" />

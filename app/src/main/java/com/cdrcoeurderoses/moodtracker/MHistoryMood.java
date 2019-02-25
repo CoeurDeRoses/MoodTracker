@@ -36,7 +36,7 @@ public class MHistoryMood extends AppCompatActivity {
                 t_4daysago = findViewById(R.id.mood_View_4),
                 t_5daysago = findViewById(R.id.mood_View_5),
                 t_6daysago = findViewById(R.id.mood_View_6),
-                t_1weekago = findViewById(R.id.mood_View7);
+                t_1weekago = findViewById(R.id.mood_View_7);
         //getSharedPreferences method is used to read data in the xml file and give their values
         //to the components of the layout history. I put the name of the file i want data and i put the key needed
         //Here the component can now take the value from the file
