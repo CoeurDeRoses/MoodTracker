@@ -168,28 +168,30 @@
             </FrameLayout>
 
             <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/show_comm"
-                android:layout_width="74dp"
-                android:layout_height="37dp"
-                android:layout_marginStart="290dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/ic_comment_black_48px"
-                android:visibility="invisible"
-                tools:layout_editor_absoluteX="229dp"
-                tools:layout_editor_absoluteY="26dp" />
-
-            <TextView
-                android:id="@+id/mood_View"
+                android:id="@+id/frame_1"
                 android:layout_width="match_parent"
-                android:layout_height="104dp"
-                android:textSize="20sp" />
+                android:layout_height="wrap_content"
+                >
 
-        </FrameLayout>
+                <Button
+                    android:id="@+id/show_comm"
+                    android:layout_width="74dp"
+                    android:layout_height="37dp"
+                    android:layout_marginStart="290dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/ic_comment_black_48px"
+                    android:visibility="invisible"
+                    tools:layout_editor_absoluteX="229dp"
+                    tools:layout_editor_absoluteY="26dp" />
+
+                <TextView
+                    android:id="@+id/mood_View"
+                    android:layout_width="match_parent"
+                    android:layout_height="104dp"
+                    android:textSize="20sp" />
+
+            </FrameLayout>
 
         </LinearLayout>
     </ScrollView>

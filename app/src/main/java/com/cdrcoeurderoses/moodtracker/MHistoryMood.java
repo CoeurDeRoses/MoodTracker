@@ -9,6 +9,7 @@ import android.support.v4.util.ArraySet;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -64,10 +65,15 @@ public class MHistoryMood extends AppCompatActivity {
         else
             show_comment.setVisibility(View.INVISIBLE);
 
-        if(!many_gson_array[1].contentEquals("first_launch_application")) {
-            t_yesterday.setText("Hier "+many_gson_array[3]);
 
+        if(!many_gson_array[1].contentEquals("first_launch_application")) {
+            t_yesterday.setText("Hier ");
             t_yesterday.setBackgroundColor(mood_rectangle_color(many_gson_array[5]));
+
+            //i modify the size and i put the relative color
+            //FrameLayout frame_1=findViewById(R.id.frame_1);
+            //
+            // frame_1.getLayoutParams().width = mood_DP(many_gson_array[5]);
         }
 
 
@@ -94,7 +100,7 @@ public class MHistoryMood extends AppCompatActivity {
             show_comment_2.setVisibility(View.INVISIBLE);
 
         if(!many_gson_array_2[1].contentEquals("first_launch_application")) {
-            t_2daysago.setText("Avant hier "+many_gson_array_2[3]);
+            t_2daysago.setText("Avant hier ");
             t_2daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_2[5]));
         }
 
@@ -120,7 +126,7 @@ public class MHistoryMood extends AppCompatActivity {
             show_comment_3.setVisibility(View.INVISIBLE);
 
         if(!many_gson_array_3[1].contentEquals("first_launch_application")) {
-            t_3daysago.setText("Il y'a 3 jours "+many_gson_array_3[3]);
+            t_3daysago.setText("Il y'a 3 jours ");
             t_3daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_3[5]));
         }
 
@@ -147,7 +153,7 @@ public class MHistoryMood extends AppCompatActivity {
             show_comment_4.setVisibility(View.INVISIBLE);
 
         if(!many_gson_array_4[1].contentEquals("first_launch_application")) {
-            t_4daysago.setText("Il y'a 4 jours "+many_gson_array_4[3]);
+            t_4daysago.setText("Il y'a 4 jours ");
             t_4daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_4[5]));
         }
 
@@ -175,7 +181,7 @@ public class MHistoryMood extends AppCompatActivity {
             show_comment_5.setVisibility(View.INVISIBLE);
 
         if(!many_gson_array_5[1].contentEquals("first_launch_application")) {
-            t_5daysago.setText("Il y'a 5 jours "+many_gson_array_5[3]);
+            t_5daysago.setText("Il y'a 5 jours ");
             t_5daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_5[5]));
         }
 
@@ -202,7 +208,7 @@ public class MHistoryMood extends AppCompatActivity {
             show_comment_6.setVisibility(View.INVISIBLE);
 
         if(!many_gson_array_6[1].contentEquals("first_launch_application")) {
-            t_6daysago.setText("Il y'a 6 jours "+many_gson_array_6[3]);
+            t_6daysago.setText("Il y'a 6 jours ");
             t_6daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_6[5]));
         }
 
@@ -214,7 +220,7 @@ public class MHistoryMood extends AppCompatActivity {
         String mood_data_json_7 = gson.fromJson(gson_file_read_7, String.class);
         final String[] many_gson_array_7 = mood_manager.mood_ready_read(mood_data_json_7);
 
-        Button show_comment_7= findViewById(R.id.show_comm_6);
+        Button show_comment_7= findViewById(R.id.show_comm_7);
         if(!many_gson_array_7[3].contentEquals("")){
             show_comment.setVisibility(View.VISIBLE);
             //and i allow the user to press the button to show the Toast message about his comment
@@ -230,7 +236,7 @@ public class MHistoryMood extends AppCompatActivity {
 
 
         if(!many_gson_array_7[1].contentEquals("first_launch_application")) {
-            t_1weekago.setText("Il y'a une semaine "+many_gson_array_7[3]);
+            t_1weekago.setText("Il y'a une semaine");
             t_1weekago.setBackgroundColor(mood_rectangle_color(many_gson_array_7[5]));
         }
 
@@ -274,21 +280,21 @@ public class MHistoryMood extends AppCompatActivity {
      * @param Hexadecimal_color
      * @return
      */
-    public String mood_DP(String Hexadecimal_color)
+    public int mood_DP(String Hexadecimal_color)
     {
 
-        String mood_dp="";
+        int mood_dp=0;
         if(Hexadecimal_color=="#65D164")
-            mood_dp="200dp";
+            mood_dp=200;
 
         if(Hexadecimal_color=="#2663EE")
-            mood_dp="150dp";
+            mood_dp=150;
 
         if(Hexadecimal_color=="#6B6C6F")
-            mood_dp="100dp";
+            mood_dp=100;
 
         if(Hexadecimal_color=="#D12A2B")
-            mood_dp="50dp";
+            mood_dp=50;
 
         return mood_dp;
     }

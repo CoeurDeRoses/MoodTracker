@@ -157,7 +157,10 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"Ouverture des applications suggérés pour l'envoie",Toast.LENGTH_SHORT).show();
                         Intent sendIntent = new Intent();
                         sendIntent.setAction(Intent.ACTION_SEND);
-                        sendIntent.putExtra(Intent.EXTRA_TEXT, mood_manager.mood_list_data_gson_string());
+
+                        String[] array_message = mood_manager.mood_ready_read(mood_manager.mood_list_data_gson_string());
+                        String message_send = "Salut ! "+array_message[1]+" aujord'hui. "+array_message[3];
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, message_send);
                         sendIntent.setType("text/plain");
                         startActivity(sendIntent);
 
