@@ -46,7 +46,7 @@ public class MHistoryMood extends AppCompatActivity {
         String[] many_gson_array = mood_manager.mood_ready_read(mood_data_json);
 
         if(!many_gson_array[1].contentEquals("first_launch_application")) {
-            t_yesterday.setText("Hier");
+            t_yesterday.setText("Hier "+many_gson_array[3]);
 
             t_yesterday.setBackgroundColor(mood_rectangle_color(many_gson_array[5]));
         }
@@ -58,7 +58,7 @@ public class MHistoryMood extends AppCompatActivity {
         String[] many_gson_array_2 = mood_manager.mood_ready_read(mood_data_json_2);
 
         if(!many_gson_array_2[1].contentEquals("first_launch_application")) {
-            t_2daysago.setText("Avant hier");
+            t_2daysago.setText("Avant hier "+many_gson_array_2[3]);
             t_2daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_2[5]));
         }
 
@@ -68,7 +68,7 @@ public class MHistoryMood extends AppCompatActivity {
         String[] many_gson_array_3 = mood_manager.mood_ready_read(mood_data_json_3);
 
         if(!many_gson_array_3[1].contentEquals("first_launch_application")) {
-            t_3daysago.setText("Il y'a 3 jours");
+            t_3daysago.setText("Il y'a 3 jours "+many_gson_array_3[3]);
             t_3daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_3[5]));
         }
 
@@ -77,7 +77,7 @@ public class MHistoryMood extends AppCompatActivity {
         String[] many_gson_array_4 = mood_manager.mood_ready_read(mood_data_json_4);
 
         if(!many_gson_array_4[1].contentEquals("first_launch_application")) {
-            t_4daysago.setText("Il y'a 4 jours");
+            t_4daysago.setText("Il y'a 4 jours "+many_gson_array_4[3]);
             t_4daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_4[5]));
         }
 
@@ -86,7 +86,7 @@ public class MHistoryMood extends AppCompatActivity {
         String[] many_gson_array_5 = mood_manager.mood_ready_read(mood_data_json_5);
 
         if(!many_gson_array_5[1].contentEquals("first_launch_application")) {
-            t_5daysago.setText("Il y'a 5 jours");
+            t_5daysago.setText("Il y'a 5 jours "+many_gson_array_5[3]);
             t_5daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_5[5]));
         }
 
@@ -95,7 +95,7 @@ public class MHistoryMood extends AppCompatActivity {
         String[] many_gson_array_6 = mood_manager.mood_ready_read(mood_data_json_6);
 
         if(!many_gson_array_6[1].contentEquals("first_launch_application")) {
-            t_6daysago.setText("Il y'a 6 jours");
+            t_6daysago.setText("Il y'a 6 jours "+many_gson_array_6[3]);
             t_6daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_6[5]));
         }
 
@@ -105,7 +105,7 @@ public class MHistoryMood extends AppCompatActivity {
         String[] many_gson_array_7 = mood_manager.mood_ready_read(mood_data_json_7);
 
         if(!many_gson_array_7[1].contentEquals("first_launch_application")) {
-            t_1weekago.setText("Il y'a une semaine");
+            t_1weekago.setText("Il y'a une semaine "+many_gson_array_7[3]);
             t_1weekago.setBackgroundColor(mood_rectangle_color(many_gson_array_7[5]));
         }
 

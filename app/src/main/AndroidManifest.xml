@@ -20,6 +20,7 @@
 
            <activity android:name=".MHistoryMood"/>
            <activity android:name=".DialogComment"/>
+            <activity android:name=".PiechartHistory"/>
     </application>
 
 </manifest>

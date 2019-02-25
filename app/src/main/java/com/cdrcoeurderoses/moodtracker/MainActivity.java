@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -59,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         //launcher_mood_data();
         // I create the ImageButton needed to switch to history page
         ImageButton goHistory =  findViewById(R.id.GoHistory);
+        // The button to go in percentage history mood
+        Button goPiechart = findViewById(R.id.Piechart_button);
 
         launcher_mood_data();
 
@@ -74,6 +77,14 @@ public class MainActivity extends AppCompatActivity {
                 Intent HistoryIntent = new Intent(MainActivity.this,MHistoryMood.class);
                 startActivity(HistoryIntent);
         }
+        });
+
+        goPiechart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent PiechartIntent = new Intent(MainActivity.this,PiechartHistory.class);
+                startActivity(PiechartIntent);
+            }
         });
 
         //here i Create the 5 buttons which allows to users to record their mood

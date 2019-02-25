@@ -26,8 +26,8 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#fff9ec4f"
-                android:layout_gravity="center_vertical">
+                android:layout_gravity="center_vertical"
+                android:background="#fff9ec4f">
 
                 <ImageButton
                     android:id="@+id/buttonSuperHappy"
@@ -122,6 +122,17 @@
         app:layout_constraintHorizontal_bias="0.345"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <Button
+        android:id="@+id/Piechart_button"
+        android:layout_width="68dp"
+        android:layout_height="68dp"
+        android:layout_marginEnd="118dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/piechart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/AddComment" />
+
     <ImageButton
 
         android:id="@+id/GoHistory"
@@ -136,13 +147,15 @@
 
     <ImageButton
         android:id="@+id/AddComment"
-        android:layout_width="68dp"
+        android:layout_width="0dp"
         android:layout_height="68dp"
         android:layout_marginStart="16dp"
+        android:layout_marginEnd="141dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/ic_note_add_black"
         android:contentDescription="@string/StringForAddCommentButton"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Piechart_button"
         app:layout_constraintStart_toStartOf="parent" />
 
 
