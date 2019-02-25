@@ -39,23 +39,43 @@ public class MHistoryMood extends AppCompatActivity {
         //Here the component can now take the value from the file
 
 
-        //Json way
+        //Json way and deserealisation
         Gson gson = new Gson();
         String gson_file_read = getSharedPreferences("mood_file",MODE_PRIVATE).getString("1", "");
         String gson_file_read_2 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("2", "");
-        //String gson_file_read_3 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("3", "");
-        //i put all in a strng
+        String gson_file_read_3 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("3", "");
+        String gson_file_read_4 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("4", "");
+        String gson_file_read_5 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("5", "");
+        String gson_file_read_6 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("6", "");
+        String gson_file_read_7 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("7", "");
+
+
+        //i put all in a string
         String mood_data_json = gson.fromJson(gson_file_read, String.class);
         String mood_data_json_2 = gson.fromJson(gson_file_read_2, String.class);
-       // String mood_data_json_3 = gson.fromJson(gson_file_read_3, String.class);
+        String mood_data_json_3 = gson.fromJson(gson_file_read_3, String.class);
+        String mood_data_json_4 = gson.fromJson(gson_file_read_4, String.class);
+        String mood_data_json_5 = gson.fromJson(gson_file_read_5, String.class);
+        String mood_data_json_6 = gson.fromJson(gson_file_read_6, String.class);
+        String mood_data_json_7 = gson.fromJson(gson_file_read_7, String.class);
+
         // i make the string workable to manage data with method of MoodManager
         String[] many_gson_array = mood_manager.mood_ready_read(mood_data_json);
         String[] many_gson_array_2 = mood_manager.mood_ready_read(mood_data_json_2);
-        //String[] many_gson_array_3 = mood_manager.mood_ready_read(mood_data_json_3);
+        String[] many_gson_array_3 = mood_manager.mood_ready_read(mood_data_json_3);
+        String[] many_gson_array_4 = mood_manager.mood_ready_read(mood_data_json_4);
+        String[] many_gson_array_5 = mood_manager.mood_ready_read(mood_data_json_5);
+        String[] many_gson_array_6 = mood_manager.mood_ready_read(mood_data_json_6);
+        String[] many_gson_array_7 = mood_manager.mood_ready_read(mood_data_json_7);
 
-        t_yesterday.setText(many_gson_array[0]+" "+many_gson_array[1]+" "+many_gson_array[7]);
-        t_2daysago.setText(many_gson_array_2[0]+" "+many_gson_array_2[1]+" "+many_gson_array_2[7]);
-        //t_3daysago.setText(many_gson_array_3[0]+" "+many_gson_array_3[1]+" "+many_gson_array_3[7]);
+        //and i show them
+        t_yesterday.setText(many_gson_array[3]+" "+many_gson_array[1]+" "+many_gson_array[7]);
+        t_2daysago.setText(many_gson_array_2[3]+" "+many_gson_array_2[1]+" "+many_gson_array_2[7]);
+        t_3daysago.setText(many_gson_array_3[3]+" "+many_gson_array_3[1]+" "+many_gson_array_3[7]);
+        t_4daysago.setText(many_gson_array_4[3]+" "+many_gson_array_4[1]+" "+many_gson_array_4[7]);
+        t_5daysago.setText(many_gson_array_5[3]+" "+many_gson_array_5[1]+" "+many_gson_array_5[7]);
+        t_6daysago.setText(many_gson_array_6[3]+" "+many_gson_array_6[1]+" "+many_gson_array_6[7]);
+        t_1weekago.setText(many_gson_array_7[3]+" "+many_gson_array_7[1]+" "+many_gson_array_7[7]);
 
 
     }
