@@ -14,4 +14,5 @@
 	<item name="show_comm_5" type="id"></item>
 	<item name="show_comm_6" type="id"></item>
 	<item name="show_comm_7" type="id"></item>
+    <item name="piechart_button" type="id"></item>
 </resources>

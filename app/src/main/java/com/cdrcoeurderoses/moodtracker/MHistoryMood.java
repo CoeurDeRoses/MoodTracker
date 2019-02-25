@@ -46,13 +46,21 @@ public class MHistoryMood extends AppCompatActivity {
         Gson gson = new Gson();
         String gson_file_read = getSharedPreferences("mood_file",MODE_PRIVATE).getString("1", "");
         String mood_data_json = gson.fromJson(gson_file_read, String.class);
-        String[] many_gson_array = mood_manager.mood_ready_read(mood_data_json);
+        final String[] many_gson_array = mood_manager.mood_ready_read(mood_data_json);
 
         //if the comment is not void i set the show comment button visible
         // i need to set invisible aswell if the comment variable is null
         Button show_comment= findViewById(R.id.show_comm);
-        if(!many_gson_array[3].contentEquals(""))
+        if(!many_gson_array[3].contentEquals("")) {
             show_comment.setVisibility(View.VISIBLE);
+            //and i allow the user to press the button to show the Toast message about his comment
+            show_comment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getApplicationContext(), many_gson_array[3], Toast.LENGTH_LONG).show();
+                }
+            });
+        }
         else
             show_comment.setVisibility(View.INVISIBLE);
 
@@ -95,11 +103,19 @@ public class MHistoryMood extends AppCompatActivity {
 
         String gson_file_read_3 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("3", "");
         String mood_data_json_3 = gson.fromJson(gson_file_read_3, String.class);
-        String[] many_gson_array_3 = mood_manager.mood_ready_read(mood_data_json_3);
+        final String[] many_gson_array_3 = mood_manager.mood_ready_read(mood_data_json_3);
 
         Button show_comment_3= findViewById(R.id.show_comm_3);
-        if(!many_gson_array_3[3].contentEquals(""))
+        if(!many_gson_array_3[3].contentEquals("")){
             show_comment_3.setVisibility(View.VISIBLE);
+            //and i allow the user to press the button to show the Toast message about his comment
+            show_comment_3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getApplicationContext(), many_gson_array_3[3], Toast.LENGTH_LONG).show();
+                }
+            });
+        }
         else
             show_comment_3.setVisibility(View.INVISIBLE);
 
@@ -114,11 +130,19 @@ public class MHistoryMood extends AppCompatActivity {
 
         String gson_file_read_4 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("4", "");
         String mood_data_json_4 = gson.fromJson(gson_file_read_4, String.class);
-        String[] many_gson_array_4 = mood_manager.mood_ready_read(mood_data_json_4);
+        final String[] many_gson_array_4 = mood_manager.mood_ready_read(mood_data_json_4);
 
         Button show_comment_4= findViewById(R.id.show_comm_4);
-        if(!many_gson_array_4[3].contentEquals(""))
+        if(!many_gson_array_4[3].contentEquals("")){
             show_comment_4.setVisibility(View.VISIBLE);
+            //and i allow the user to press the button to show the Toast message about his comment
+            show_comment_4.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getApplicationContext(), many_gson_array_4[3], Toast.LENGTH_LONG).show();
+                }
+            });
+        }
         else
             show_comment_4.setVisibility(View.INVISIBLE);
 
@@ -134,11 +158,19 @@ public class MHistoryMood extends AppCompatActivity {
 
         String gson_file_read_5 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("5", "");
         String mood_data_json_5 = gson.fromJson(gson_file_read_5, String.class);
-        String[] many_gson_array_5 = mood_manager.mood_ready_read(mood_data_json_5);
+        final String[] many_gson_array_5 = mood_manager.mood_ready_read(mood_data_json_5);
 
         Button show_comment_5= findViewById(R.id.show_comm_5);
-        if(!many_gson_array_5[3].contentEquals(""))
+        if(!many_gson_array_5[3].contentEquals("")){
             show_comment_5.setVisibility(View.VISIBLE);
+            //and i allow the user to press the button to show the Toast message about his comment
+            show_comment_5.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getApplicationContext(), many_gson_array_5[3], Toast.LENGTH_LONG).show();
+                }
+            });
+        }
         else
             show_comment_5.setVisibility(View.INVISIBLE);
 
@@ -153,11 +185,19 @@ public class MHistoryMood extends AppCompatActivity {
 
         String gson_file_read_6 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("6", "");
         String mood_data_json_6 = gson.fromJson(gson_file_read_6, String.class);
-        String[] many_gson_array_6 = mood_manager.mood_ready_read(mood_data_json_6);
+        final String[] many_gson_array_6 = mood_manager.mood_ready_read(mood_data_json_6);
 
         Button show_comment_6= findViewById(R.id.show_comm_6);
-        if(!many_gson_array_6[3].contentEquals(""))
-            show_comment_6.setVisibility(View.VISIBLE);
+        if(!many_gson_array_6[3].contentEquals("")){
+            show_comment.setVisibility(View.VISIBLE);
+            //and i allow the user to press the button to show the Toast message about his comment
+            show_comment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getApplicationContext(), many_gson_array_6[3], Toast.LENGTH_LONG).show();
+                }
+            });
+        }
         else
             show_comment_6.setVisibility(View.INVISIBLE);
 
@@ -167,10 +207,26 @@ public class MHistoryMood extends AppCompatActivity {
         }
 
 
+
+
+
         String gson_file_read_7 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("7", "");
         String mood_data_json_7 = gson.fromJson(gson_file_read_7, String.class);
-        String[] many_gson_array_7 = mood_manager.mood_ready_read(mood_data_json_7);
+        final String[] many_gson_array_7 = mood_manager.mood_ready_read(mood_data_json_7);
 
+        Button show_comment_7= findViewById(R.id.show_comm_6);
+        if(!many_gson_array_7[3].contentEquals("")){
+            show_comment.setVisibility(View.VISIBLE);
+            //and i allow the user to press the button to show the Toast message about his comment
+            show_comment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getApplicationContext(), many_gson_array_7[3], Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+        else
+            show_comment_7.setVisibility(View.INVISIBLE);
 
 
         if(!many_gson_array_7[1].contentEquals("first_launch_application")) {
