@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.gson.Gson;
@@ -66,11 +67,21 @@ public class MHistoryMood extends AppCompatActivity {
 
         String gson_file_read_2 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("2", "");
         String mood_data_json_2 = gson.fromJson(gson_file_read_2, String.class);
-        String[] many_gson_array_2 = mood_manager.mood_ready_read(mood_data_json_2);
+        final String[] many_gson_array_2 = mood_manager.mood_ready_read(mood_data_json_2);
 
         Button show_comment_2= findViewById(R.id.show_comm_2);
-        if(!many_gson_array_2[3].contentEquals(""))
+        if(!many_gson_array_2[3].contentEquals("")) {
             show_comment_2.setVisibility(View.VISIBLE);
+            //and we allow the user to press the button and set the event which show the toast message
+            //about the comment
+            show_comment_2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getApplicationContext(),many_gson_array_2[3],Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+
         else
             show_comment_2.setVisibility(View.INVISIBLE);
 
