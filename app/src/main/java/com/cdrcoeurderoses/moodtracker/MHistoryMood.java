@@ -2,6 +2,7 @@ package com.cdrcoeurderoses.moodtracker;
 
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.util.ArraySet;
@@ -70,13 +71,53 @@ public class MHistoryMood extends AppCompatActivity {
 
         //and i show them
         t_yesterday.setText(many_gson_array[3]+" "+many_gson_array[1]+" "+many_gson_array[7]);
+        t_yesterday.setBackgroundColor(mood_rectangle_color(many_gson_array[5]));
+
         t_2daysago.setText(many_gson_array_2[3]+" "+many_gson_array_2[1]+" "+many_gson_array_2[7]);
+        t_2daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_2[5]));
+
         t_3daysago.setText(many_gson_array_3[3]+" "+many_gson_array_3[1]+" "+many_gson_array_3[7]);
+        t_3daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_3[5]));
+
         t_4daysago.setText(many_gson_array_4[3]+" "+many_gson_array_4[1]+" "+many_gson_array_4[7]);
+        t_4daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_4[5]));
+
         t_5daysago.setText(many_gson_array_5[3]+" "+many_gson_array_5[1]+" "+many_gson_array_5[7]);
+        t_5daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_5[5]));
+
         t_6daysago.setText(many_gson_array_6[3]+" "+many_gson_array_6[1]+" "+many_gson_array_6[7]);
+        t_6daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_6[5]));
+
         t_1weekago.setText(many_gson_array_7[3]+" "+many_gson_array_7[1]+" "+many_gson_array_7[7]);
+        t_1weekago.setBackgroundColor(mood_rectangle_color(many_gson_array_7[5]));
 
 
+    }
+
+    public int mood_rectangle_color(String Hexadecimal_color)
+    {
+        int mood_color = 0;
+        switch (Hexadecimal_color)
+        {
+            case "#EAE108": //Yellow color
+                mood_color = Color.parseColor(Hexadecimal_color);break;
+
+            case "#65D164": //Green color
+                mood_color = Color.parseColor(Hexadecimal_color);break;
+
+            case "#2663EE": //Blue color
+                mood_color = Color.parseColor(Hexadecimal_color);break;
+
+            case "#6B6C6F": //Grey color
+                mood_color = Color.parseColor(Hexadecimal_color);break;
+
+            case "#D12A2B": //Yellow color
+                mood_color = Color.parseColor(Hexadecimal_color);break;
+
+            default: //Yellow color
+                mood_color = Color.parseColor("#EAE108");break;
+        }
+
+        return mood_color;
     }
 }

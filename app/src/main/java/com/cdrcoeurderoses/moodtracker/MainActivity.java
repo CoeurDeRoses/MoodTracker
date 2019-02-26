@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case "Etes vous vraiment d'une humeur normale ?":
-                        mood_Color = "2663EE"; playMusic = MediaPlayer.create(getApplicationContext(),R.raw.sound_normal); playMusic.start();
+                        mood_Color = "#2663EE"; playMusic = MediaPlayer.create(getApplicationContext(),R.raw.sound_normal); playMusic.start();
                         mood_name ="Humeur normale";
                         break;
 
