@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.util.ArraySet;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 
@@ -103,6 +105,13 @@ public class MHistoryMood extends AppCompatActivity {
         String gson_file_read_7 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("7", "");
         String mood_data_json_7 = gson.fromJson(gson_file_read_7, String.class);
         String[] many_gson_array_7 = mood_manager.mood_ready_read(mood_data_json_7);
+
+        //if the comment is not null i set the show comment button visible
+        Button show_comment_7= findViewById(R.id.show_comm_7);
+        if(!many_gson_array_7[3].contentEquals(""))
+            show_comment_7.setVisibility(View.VISIBLE);
+        else
+            show_comment_7.setVisibility(View.INVISIBLE);
 
         if(!many_gson_array_7[1].contentEquals("first_launch_application")) {
             t_1weekago.setText("Il y'a une semaine "+many_gson_array_7[3]);

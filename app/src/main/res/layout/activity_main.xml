@@ -123,7 +123,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/Piechart_button"
+        android:id="@+id/piechart_button"
         android:layout_width="68dp"
         android:layout_height="68dp"
         android:layout_marginEnd="118dp"
@@ -155,7 +155,7 @@
         android:background="@drawable/ic_note_add_black"
         android:contentDescription="@string/StringForAddCommentButton"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/Piechart_button"
+        app:layout_constraintEnd_toStartOf="@+id/piechart_button"
         app:layout_constraintStart_toStartOf="parent" />
 
 
