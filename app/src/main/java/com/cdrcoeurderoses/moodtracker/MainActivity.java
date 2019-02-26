@@ -39,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
     //To record the user choice i make a string variable which have to be put in each case
     // to receive the relative color mood_color and other userfull variable
     private String mood_name;
-    private String mood_sentence="";
+    private String mood_sentence;
+
     private String mood_Color;
     private SimpleDateFormat mood_date;
 
@@ -124,7 +125,15 @@ public class MainActivity extends AppCompatActivity {
 
                         Toast.makeText(getApplicationContext(),"Commentaire enregistré",Toast.LENGTH_SHORT).show();
                         //I use cancel() method from dialog class to close the dialog box after a choice
+
+
                         mood_sentence = dialogAddComment.getEtComment().getText().toString();
+                        if(mood_sentence==null)
+                        {
+                            mood_sentence="";
+                        }
+
+
 
                         dialogAddComment.cancel();
                     }
@@ -256,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
     {
         Gson gson = new Gson();
         String gson_file_read = getSharedPreferences("mood_file",MODE_PRIVATE).getString("1", "");
-        //i put all in a strng
+        //i put all in a string
         String mood_data_json = gson.fromJson(gson_file_read, String.class);
         // i make the string workable to manage data with method of MoodManager
         String[] many_gson_array = mood_manager.mood_ready_read(mood_data_json);
@@ -279,23 +288,7 @@ public class MainActivity extends AppCompatActivity {
         mood_date = new SimpleDateFormat("ddMMyy");//the current date
         String string_mood_date= mood_date.format(today);
 
-
-
-        //Here i determinate if it's the first time some start app and we have no value
-        //i make the condition in the MHistoryActivity code wrong to not execute setbackground and setText
-        // and let the backgroung of each rectangle normal
-        //to find if it's the first time i check if we have the key 1 recorder
-        //if not the rectange stay normal but if
-        if(!getSharedPreferences("mood_file", MODE_PRIVATE).contains("1")) {
-            mood_name = "first_launch_application";
-        }
-        mood_manager.record_ManyData(mood_name, mood_sentence,mood_Color,string_mood_date);
-
-                        /* Xml file way
-                        SharedPreferences mood_file = getSharedPreferences("mood_data_file", MODE_PRIVATE);
-                        SharedPreferences.Editor mood_Editor = mood_file.edit();
-                        mood_Editor.putStringSet("many_values",mood_manager.mood_list_data()).apply();
-                        */
+        mood_manager.record_ManyData(mood_name,mood_sentence,mood_Color,string_mood_date);
 
         //Json way
         Gson gson_manager = new Gson();
@@ -306,38 +299,42 @@ public class MainActivity extends AppCompatActivity {
 
 
         // i test if the keys don't exist i don't initialise them
+        // and with a set of defaut value except key 1
+        String first_start_set = gson_manager.toJson("{\"mood_name\":\"first_launch_application\",\"" +
+                "mood_sentence\":\" \",\"mood_color\":\" \",\"mood_date\":\" \"}");
+
         if (!gson_file_write.contains("1")) {
             mood_gson_Editor.putString("1", mood_data_gson).apply();
         }
         if (!gson_file_write.contains("2")) {
-            mood_gson_Editor.putString("2", mood_data_gson).apply();
+            mood_gson_Editor.putString("2", first_start_set).apply();
         }
         if (!gson_file_write.contains("3")) {
-            mood_gson_Editor.putString("3", mood_data_gson).apply();
+            mood_gson_Editor.putString("3", first_start_set).apply();
         }
 
         if (!gson_file_write.contains("4")) {
-            mood_gson_Editor.putString("4", mood_data_gson).apply();
+            mood_gson_Editor.putString("4", first_start_set).apply();
         }
         if (!gson_file_write.contains("5")) {
-            mood_gson_Editor.putString("5", mood_data_gson).apply();
+            mood_gson_Editor.putString("5", first_start_set).apply();
         }
         if (!gson_file_write.contains("5")) {
-            mood_gson_Editor.putString("5", mood_data_gson).apply();
+            mood_gson_Editor.putString("5", first_start_set).apply();
         }
         if (!gson_file_write.contains("6")) {
-            mood_gson_Editor.putString("6", mood_data_gson).apply();
+            mood_gson_Editor.putString("6", first_start_set).apply();
         }
 
         if (!gson_file_write.contains("7")) {
-            mood_gson_Editor.putString("7", mood_data_gson).apply();
+            mood_gson_Editor.putString("7", first_start_set).apply();
         }
         //here is the code behavior to handle data about change date if we change the day
         // if we change the day the day i must switch the data contained to key 1 to the 2 and the
         // data of key 2 to the 3 and the same way for the rest
         if(!string_mood_date.contentEquals(most_recent_date_recorded()))
         {
-            Toast.makeText(getApplicationContext(), "Comparaison date " + most_recent_date_recorded()+" AND "+string_mood_date, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Comparaison date --- " + most_recent_date_recorded()+" AND "+string_mood_date, Toast.LENGTH_LONG).show();
             // we must always start the process from the last-1 to the recent just before its data
             // and we repeat the same until the second i also code the derealisation process first and
             // the serealisation process after
@@ -351,6 +348,7 @@ public class MainActivity extends AppCompatActivity {
             String[] many_gson_array_7 = mood_manager.mood_ready_read(mood_data_gson_7);
             //next step
             mood_manager.record_ManyData(many_gson_array_7[1],many_gson_array_7[3],many_gson_array_7[5],many_gson_array_7[7]);
+            //mood_manager.record_ManyData(many_gson_array_7[1],many_gson_array_7[5],many_gson_array_7[7]);
             // next
             mood_data_gson_7 = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
             //and record
@@ -365,6 +363,7 @@ public class MainActivity extends AppCompatActivity {
             String[] many_gson_array_6 = mood_manager.mood_ready_read(mood_data_gson_6);
             //next step
             mood_manager.record_ManyData(many_gson_array_6[1],many_gson_array_6[3],many_gson_array_6[5],many_gson_array_6[7]);
+            //mood_manager.record_ManyData(many_gson_array_6[1],many_gson_array_6[5],many_gson_array_6[7]);
             // next
             mood_data_gson_6 = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
             //and record
@@ -378,6 +377,7 @@ public class MainActivity extends AppCompatActivity {
             String[] many_gson_array_5 = mood_manager.mood_ready_read(mood_data_gson_5);
             //next step
             mood_manager.record_ManyData(many_gson_array_5[1],many_gson_array_5[3],many_gson_array_5[5],many_gson_array_5[7]);
+            //mood_manager.record_ManyData(many_gson_array_5[1],many_gson_array_5[5],many_gson_array_5[7]);
             // next
             mood_data_gson_5 = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
             //and record
@@ -394,6 +394,7 @@ public class MainActivity extends AppCompatActivity {
             String[] many_gson_array_4 = mood_manager.mood_ready_read(mood_data_gson_4);
             //next step
             mood_manager.record_ManyData(many_gson_array_4[1],many_gson_array_4[3],many_gson_array_4[5],many_gson_array_4[7]);
+            //mood_manager.record_ManyData(many_gson_array_4[1],many_gson_array_4[5],many_gson_array_4[7]);
             // next
             mood_data_gson_4 = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
             //and record
@@ -410,6 +411,7 @@ public class MainActivity extends AppCompatActivity {
             String[] many_gson_array_3 = mood_manager.mood_ready_read(mood_data_gson_3);
             //next step
             mood_manager.record_ManyData(many_gson_array_3[1],many_gson_array_3[3],many_gson_array_3[5],many_gson_array_3[7]);
+            //mood_manager.record_ManyData(many_gson_array_3[1],many_gson_array_3[5],many_gson_array_3[7]);
             // next
             mood_data_gson_3 = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
             //and record
@@ -426,15 +428,19 @@ public class MainActivity extends AppCompatActivity {
             String[] many_gson_array_2 = mood_manager.mood_ready_read(mood_data_gson_2);
             //next step
             mood_manager.record_ManyData(many_gson_array_2[1],many_gson_array_2[3],many_gson_array_2[5],many_gson_array_2[7]);
+            //mood_manager.record_ManyData(many_gson_array_2[1],many_gson_array_2[5],many_gson_array_2[7]);
             // next
             mood_data_gson_2 = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
             //and record
             mood_gson_Editor.putString("2",mood_data_gson_2).apply();
 
 
+
+
         }
-        //always put the record instruction after the test or the old data of key one will be erased
+        //always put the record instruction after the record of other keys the old data of key one will be erased
         //and the key 2 will not take it but gonna take the new data as key
         mood_gson_Editor.putString("1", mood_data_gson).apply();
+        mood_sentence="";
     }
 }

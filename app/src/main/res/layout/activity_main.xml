@@ -114,7 +114,7 @@
         android:id="@+id/ShareMood"
         android:layout_width="0dp"
         android:layout_height="68dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="41dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/share_mood"
         android:contentDescription="@string/Sharebutton"
@@ -126,12 +126,12 @@
         android:id="@+id/piechart_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="34dp"
+        android:layout_marginEnd="33dp"
         android:background="@drawable/piechart"
-        app:layout_constraintBottom_toBottomOf="@+id/ShareMood"
+        app:layout_constraintBottom_toBottomOf="@+id/GoHistory"
         app:layout_constraintEnd_toStartOf="@+id/GoHistory"
         app:layout_constraintStart_toEndOf="@+id/ShareMood"
-        app:layout_constraintTop_toTopOf="@+id/ShareMood" />
+        app:layout_constraintTop_toTopOf="@+id/GoHistory" />
 
     <ImageButton
 
@@ -141,17 +141,17 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/ic_history_black"
         android:contentDescription="@string/StringForMoodHistory"
-        app:layout_constraintBottom_toBottomOf="@+id/piechart_button"
+        app:layout_constraintBottom_toBottomOf="@+id/ShareMood"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/piechart_button"
-        app:layout_constraintTop_toTopOf="@+id/piechart_button" />
+        app:layout_constraintTop_toTopOf="@+id/ShareMood" />
 
     <ImageButton
         android:id="@+id/AddComment"
         android:layout_width="0dp"
         android:layout_height="68dp"
-        android:layout_marginStart="33dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="33dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/ic_note_add_black"
         android:contentDescription="@string/StringForAddCommentButton"

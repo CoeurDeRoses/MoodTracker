@@ -52,22 +52,23 @@ public class MHistoryMood extends AppCompatActivity {
         //if the comment is not void i set the show comment button visible
         // i need to set invisible aswell if the comment variable is null
         Button show_comment= findViewById(R.id.show_comm);
-        if(!many_gson_array[3].contentEquals("")) {
+        if(!many_gson_array[3].contentEquals("" ) && !many_gson_array[3].contentEquals(" " ) && !many_gson_array[3].contentEquals("null")) {
             show_comment.setVisibility(View.VISIBLE);
+            t_yesterday.setText(many_gson_array[3]+" "+many_gson_array[7]);
             //and i allow the user to press the button to show the Toast message about his comment
             show_comment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getApplicationContext(), many_gson_array[3], Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), many_gson_array[3]+" first", Toast.LENGTH_LONG).show();
                 }
             });
         }
-        else
-            show_comment.setVisibility(View.INVISIBLE);
+        else{
+            show_comment.setVisibility(View.INVISIBLE);}
 
 
         if(!many_gson_array[1].contentEquals("first_launch_application")) {
-            t_yesterday.setText("Hier ");
+            t_yesterday.setText("Hier "+many_gson_array[3]);
             t_yesterday.setBackgroundColor(mood_rectangle_color(many_gson_array[5]));
 
             //i modify the size and i put the relative color
@@ -84,8 +85,10 @@ public class MHistoryMood extends AppCompatActivity {
         final String[] many_gson_array_2 = mood_manager.mood_ready_read(mood_data_json_2);
 
         Button show_comment_2= findViewById(R.id.show_comm_2);
-        if(!many_gson_array_2[3].contentEquals("")) {
+        if(!many_gson_array_2[3].contentEquals("" ) && !many_gson_array_2[3].contentEquals(" " )  && !many_gson_array_2[3].contentEquals("null")) {
+            t_2daysago.setText(many_gson_array_2[3]);
             show_comment_2.setVisibility(View.VISIBLE);
+
             //and we allow the user to press the button and set the event which show the toast message
             //about the comment
             show_comment_2.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +103,7 @@ public class MHistoryMood extends AppCompatActivity {
             show_comment_2.setVisibility(View.INVISIBLE);
 
         if(!many_gson_array_2[1].contentEquals("first_launch_application")) {
-            t_2daysago.setText("Avant hier ");
+            t_2daysago.setText("Avant hier "+many_gson_array_2[3]);
             t_2daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_2[5]));
         }
 
@@ -112,8 +115,9 @@ public class MHistoryMood extends AppCompatActivity {
         final String[] many_gson_array_3 = mood_manager.mood_ready_read(mood_data_json_3);
 
         Button show_comment_3= findViewById(R.id.show_comm_3);
-        if(!many_gson_array_3[3].contentEquals("")){
+        if(!many_gson_array_3[3].contentEquals("")&& !many_gson_array_3[3].contentEquals(" " )&& !many_gson_array_3[3].contentEquals("null")){
             show_comment_3.setVisibility(View.VISIBLE);
+            t_3daysago.setText(many_gson_array_3[3]);
             //and i allow the user to press the button to show the Toast message about his comment
             show_comment_3.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -126,7 +130,7 @@ public class MHistoryMood extends AppCompatActivity {
             show_comment_3.setVisibility(View.INVISIBLE);
 
         if(!many_gson_array_3[1].contentEquals("first_launch_application")) {
-            t_3daysago.setText("Il y'a 3 jours ");
+            t_3daysago.setText("Il y'a 3 jours "+many_gson_array_3[3]);
             t_3daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_3[5]));
         }
 
@@ -139,7 +143,7 @@ public class MHistoryMood extends AppCompatActivity {
         final String[] many_gson_array_4 = mood_manager.mood_ready_read(mood_data_json_4);
 
         Button show_comment_4= findViewById(R.id.show_comm_4);
-        if(!many_gson_array_4[3].contentEquals("")){
+        if(!many_gson_array_4[3].contentEquals("")&& !many_gson_array_4[3].contentEquals(" " )&& !many_gson_array_4[3].contentEquals("null")){
             show_comment_4.setVisibility(View.VISIBLE);
             //and i allow the user to press the button to show the Toast message about his comment
             show_comment_4.setOnClickListener(new View.OnClickListener() {
@@ -167,7 +171,7 @@ public class MHistoryMood extends AppCompatActivity {
         final String[] many_gson_array_5 = mood_manager.mood_ready_read(mood_data_json_5);
 
         Button show_comment_5= findViewById(R.id.show_comm_5);
-        if(!many_gson_array_5[3].contentEquals("")){
+        if(!many_gson_array_5[3].contentEquals("")&& !many_gson_array_5[3].contentEquals(" " )&& !many_gson_array_5[3].contentEquals("null")){
             show_comment_5.setVisibility(View.VISIBLE);
             //and i allow the user to press the button to show the Toast message about his comment
             show_comment_5.setOnClickListener(new View.OnClickListener() {
@@ -194,18 +198,18 @@ public class MHistoryMood extends AppCompatActivity {
         final String[] many_gson_array_6 = mood_manager.mood_ready_read(mood_data_json_6);
 
         Button show_comment_6= findViewById(R.id.show_comm_6);
-        if(!many_gson_array_6[3].contentEquals("")){
-            show_comment.setVisibility(View.VISIBLE);
+        if(!many_gson_array_6[3].contentEquals("")&& !many_gson_array_6[3].contentEquals(" " )&& !many_gson_array_6[3].contentEquals("null")){
+            show_comment_6.setVisibility(View.VISIBLE);
             //and i allow the user to press the button to show the Toast message about his comment
-            show_comment.setOnClickListener(new View.OnClickListener() {
+            show_comment_6.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(getApplicationContext(), many_gson_array_6[3], Toast.LENGTH_LONG).show();
                 }
             });
         }
-        else
-            show_comment_6.setVisibility(View.INVISIBLE);
+        else{
+            show_comment_6.setVisibility(View.INVISIBLE);}
 
         if(!many_gson_array_6[1].contentEquals("first_launch_application")) {
             t_6daysago.setText("Il y'a 6 jours ");
@@ -221,18 +225,19 @@ public class MHistoryMood extends AppCompatActivity {
         final String[] many_gson_array_7 = mood_manager.mood_ready_read(mood_data_json_7);
 
         Button show_comment_7= findViewById(R.id.show_comm_7);
-        if(!many_gson_array_7[3].contentEquals("")){
-            show_comment.setVisibility(View.VISIBLE);
+        if(!many_gson_array_7[3].contentEquals("")&& !many_gson_array_7[3].contentEquals(" " )&& !many_gson_array_7[3].contentEquals("null")){
+            show_comment_7.setVisibility(View.VISIBLE);
             //and i allow the user to press the button to show the Toast message about his comment
-            show_comment.setOnClickListener(new View.OnClickListener() {
+            show_comment_7.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(getApplicationContext(), many_gson_array_7[3], Toast.LENGTH_LONG).show();
                 }
             });
         }
-        else
+        else {
             show_comment_7.setVisibility(View.INVISIBLE);
+        }
 
 
         if(!many_gson_array_7[1].contentEquals("first_launch_application")) {
