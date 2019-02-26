@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     //To record the user choice i make a string variable which have to be put in each case
     // to receive the relative color mood_color and other userfull variable
     private String mood_name;
-    private String mood_sentence;
+    private String mood_sentence="";
     private String mood_Color;
     private SimpleDateFormat mood_date;
 
@@ -108,6 +108,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         //now i need to handle the button which have to record the possible comment of the user about his mood
+
+
 
         ImageButton btAddComment = findViewById(R.id.AddComment);
         btAddComment.setOnClickListener(new View.OnClickListener() {

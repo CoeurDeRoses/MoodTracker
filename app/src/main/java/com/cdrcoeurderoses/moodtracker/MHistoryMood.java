@@ -47,6 +47,14 @@ public class MHistoryMood extends AppCompatActivity {
         String mood_data_json = gson.fromJson(gson_file_read, String.class);
         String[] many_gson_array = mood_manager.mood_ready_read(mood_data_json);
 
+        //if the comment is not void i set the show comment button visible
+        // i need to set invisible aswell if the comment variable is null
+        Button show_comment= findViewById(R.id.show_comm);
+        if(!many_gson_array[3].contentEquals(""))
+            show_comment.setVisibility(View.VISIBLE);
+        else
+            show_comment.setVisibility(View.INVISIBLE);
+
         if(!many_gson_array[1].contentEquals("first_launch_application")) {
             t_yesterday.setText("Hier "+many_gson_array[3]);
 
@@ -106,12 +114,7 @@ public class MHistoryMood extends AppCompatActivity {
         String mood_data_json_7 = gson.fromJson(gson_file_read_7, String.class);
         String[] many_gson_array_7 = mood_manager.mood_ready_read(mood_data_json_7);
 
-        //if the comment is not null i set the show comment button visible
-        Button show_comment_7= findViewById(R.id.show_comm_7);
-        if(!many_gson_array_7[3].contentEquals(""))
-            show_comment_7.setVisibility(View.VISIBLE);
-        else
-            show_comment_7.setVisibility(View.INVISIBLE);
+
 
         if(!many_gson_array_7[1].contentEquals("first_launch_application")) {
             t_1weekago.setText("Il y'a une semaine "+many_gson_array_7[3]);
