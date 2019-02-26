@@ -31,11 +31,11 @@ public class MHistoryMood extends AppCompatActivity {
 
         // i make the link between variable and the component of history layout
         TextView t_yesterday = findViewById(R.id.mood_View),
-                t_2daysago = findViewById(R.id.mood_View2),
-                t_3daysago = findViewById(R.id.mood_View3),
-                t_4daysago = findViewById(R.id.mood_View4),
-                t_5daysago = findViewById(R.id.mood_View5),
-                t_6daysago = findViewById(R.id.mood_View6),
+                t_2daysago = findViewById(R.id.mood_View_2),
+                t_3daysago = findViewById(R.id.mood_View_3),
+                t_4daysago = findViewById(R.id.mood_View_4),
+                t_5daysago = findViewById(R.id.mood_View_5),
+                t_6daysago = findViewById(R.id.mood_View_6),
                 t_1weekago = findViewById(R.id.mood_View7);
         //getSharedPreferences method is used to read data in the xml file and give their values
         //to the components of the layout history. I put the name of the file i want data and i put the key needed
@@ -63,9 +63,16 @@ public class MHistoryMood extends AppCompatActivity {
 
 
 
+
         String gson_file_read_2 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("2", "");
         String mood_data_json_2 = gson.fromJson(gson_file_read_2, String.class);
         String[] many_gson_array_2 = mood_manager.mood_ready_read(mood_data_json_2);
+
+        Button show_comment_2= findViewById(R.id.show_comm_2);
+        if(!many_gson_array_2[3].contentEquals(""))
+            show_comment_2.setVisibility(View.VISIBLE);
+        else
+            show_comment_2.setVisibility(View.INVISIBLE);
 
         if(!many_gson_array_2[1].contentEquals("first_launch_application")) {
             t_2daysago.setText("Avant hier "+many_gson_array_2[3]);
@@ -73,36 +80,75 @@ public class MHistoryMood extends AppCompatActivity {
         }
 
 
+
+
         String gson_file_read_3 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("3", "");
         String mood_data_json_3 = gson.fromJson(gson_file_read_3, String.class);
         String[] many_gson_array_3 = mood_manager.mood_ready_read(mood_data_json_3);
+
+        Button show_comment_3= findViewById(R.id.show_comm_3);
+        if(!many_gson_array_3[3].contentEquals(""))
+            show_comment_3.setVisibility(View.VISIBLE);
+        else
+            show_comment_3.setVisibility(View.INVISIBLE);
 
         if(!many_gson_array_3[1].contentEquals("first_launch_application")) {
             t_3daysago.setText("Il y'a 3 jours "+many_gson_array_3[3]);
             t_3daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_3[5]));
         }
 
+
+
+
+
         String gson_file_read_4 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("4", "");
         String mood_data_json_4 = gson.fromJson(gson_file_read_4, String.class);
         String[] many_gson_array_4 = mood_manager.mood_ready_read(mood_data_json_4);
+
+        Button show_comment_4= findViewById(R.id.show_comm_4);
+        if(!many_gson_array_4[3].contentEquals(""))
+            show_comment_4.setVisibility(View.VISIBLE);
+        else
+            show_comment_4.setVisibility(View.INVISIBLE);
 
         if(!many_gson_array_4[1].contentEquals("first_launch_application")) {
             t_4daysago.setText("Il y'a 4 jours "+many_gson_array_4[3]);
             t_4daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_4[5]));
         }
 
+
+
+
+
+
         String gson_file_read_5 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("5", "");
         String mood_data_json_5 = gson.fromJson(gson_file_read_5, String.class);
         String[] many_gson_array_5 = mood_manager.mood_ready_read(mood_data_json_5);
+
+        Button show_comment_5= findViewById(R.id.show_comm_5);
+        if(!many_gson_array_5[3].contentEquals(""))
+            show_comment_5.setVisibility(View.VISIBLE);
+        else
+            show_comment_5.setVisibility(View.INVISIBLE);
 
         if(!many_gson_array_5[1].contentEquals("first_launch_application")) {
             t_5daysago.setText("Il y'a 5 jours "+many_gson_array_5[3]);
             t_5daysago.setBackgroundColor(mood_rectangle_color(many_gson_array_5[5]));
         }
 
+
+
+
+
         String gson_file_read_6 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("6", "");
         String mood_data_json_6 = gson.fromJson(gson_file_read_6, String.class);
         String[] many_gson_array_6 = mood_manager.mood_ready_read(mood_data_json_6);
+
+        Button show_comment_6= findViewById(R.id.show_comm_6);
+        if(!many_gson_array_6[3].contentEquals(""))
+            show_comment_6.setVisibility(View.VISIBLE);
+        else
+            show_comment_6.setVisibility(View.INVISIBLE);
 
         if(!many_gson_array_6[1].contentEquals("first_launch_application")) {
             t_6daysago.setText("Il y'a 6 jours "+many_gson_array_6[3]);

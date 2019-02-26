@@ -121,14 +121,10 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         //No need to use the setPositive or Negative method, cause i created my customized method
                         // with my customized buttons
-                        mood_sentence = dialogAddComment.getEtComment().getText().toString();
-                        if(mood_sentence==null)
-                        {
-                            mood_sentence="";//i write this code cause if user send SMS with a void comment
-                            // the receive gonna receive null value word
-                        }
+
                         Toast.makeText(getApplicationContext(),"Commentaire enregistré",Toast.LENGTH_SHORT).show();
                         //I use cancel() method from dialog class to close the dialog box after a choice
+                        mood_sentence = dialogAddComment.getEtComment().getText().toString();
 
                         dialogAddComment.cancel();
                     }

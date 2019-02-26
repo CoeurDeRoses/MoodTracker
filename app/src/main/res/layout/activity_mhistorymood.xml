@@ -47,35 +47,125 @@
 
             </FrameLayout>
 
+            <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/show_comm_6"
+                android:layout_width="74dp"
+                android:layout_height="37dp"
+                android:layout_marginStart="290dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/ic_comment_black_48px"
+                android:visibility="invisible"
+                tools:layout_editor_absoluteX="229dp"
+                tools:layout_editor_absoluteY="26dp" />
+
             <TextView
-                android:id="@+id/mood_View6"
+                android:id="@+id/mood_View_6"
                 android:layout_width="match_parent"
                 android:layout_height="104dp"
                 android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/mood_View5"
-                android:layout_width="match_parent"
-                android:layout_height="104dp"
-                android:textSize="20sp" />
+        </FrameLayout>
 
-            <TextView
-                android:id="@+id/mood_View4"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="104dp"
-                android:textSize="20sp" />
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/mood_View3"
-                android:layout_width="match_parent"
-                android:layout_height="104dp"
-                android:textSize="20sp" />
+                <Button
+                    android:id="@+id/show_comm_5"
+                    android:layout_width="74dp"
+                    android:layout_height="37dp"
+                    android:layout_marginStart="290dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/ic_comment_black_48px"
+                    android:visibility="invisible"
+                    tools:layout_editor_absoluteX="229dp"
+                    tools:layout_editor_absoluteY="26dp" />
 
-            <TextView
-                android:id="@+id/mood_View2"
+                <TextView
+                    android:id="@+id/mood_View_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="104dp"
+                    android:textSize="20sp" />
+
+            </FrameLayout>
+
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="104dp"
-                android:textSize="20sp" />
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/show_comm_4"
+                    android:layout_width="74dp"
+                    android:layout_height="37dp"
+                    android:layout_marginStart="290dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/ic_comment_black_48px"
+                    android:visibility="invisible"
+                    tools:layout_editor_absoluteX="229dp"
+                    tools:layout_editor_absoluteY="26dp" />
+
+                <TextView
+                    android:id="@+id/mood_View_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="104dp"
+                    android:textSize="20sp" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/show_comm_3"
+                    android:layout_width="74dp"
+                    android:layout_height="37dp"
+                    android:layout_marginStart="290dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/ic_comment_black_48px"
+                    android:visibility="invisible"
+                    tools:layout_editor_absoluteX="229dp"
+                    tools:layout_editor_absoluteY="26dp" />
+
+                <TextView
+                    android:id="@+id/mood_View_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="104dp"
+                    android:textSize="20sp" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/show_comm_2"
+                    android:layout_width="74dp"
+                    android:layout_height="37dp"
+                    android:layout_marginStart="290dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/ic_comment_black_48px"
+                    android:visibility="invisible"
+                    tools:layout_editor_absoluteX="229dp"
+                    tools:layout_editor_absoluteY="26dp" />
+
+                <TextView
+                    android:id="@+id/mood_View_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="104dp"
+                    android:textSize="20sp" />
+
+            </FrameLayout>
 
             <FrameLayout
             android:layout_width="match_parent"
