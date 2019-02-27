@@ -134,8 +134,6 @@ public class MainActivity extends AppCompatActivity {
                             mood_sentence="";
                         }
 
-
-
                         dialogAddComment.cancel();
                     }
                 });
@@ -304,31 +302,14 @@ public class MainActivity extends AppCompatActivity {
         String first_start_set = gson_manager.toJson("{\"mood_name\":\"first_launch_application\",\"" +
                 "mood_sentence\":\" \",\"mood_color\":\" \",\"mood_date\":\" \"}");
 
-        if (!gson_file_write.contains("1")) {
-            mood_gson_Editor.putString("1", mood_data_gson).apply();
-        }
-        if (!gson_file_write.contains("2")) {
-            mood_gson_Editor.putString("2", first_start_set).apply();
-        }
-        if (!gson_file_write.contains("3")) {
-            mood_gson_Editor.putString("3", first_start_set).apply();
-        }
 
-        if (!gson_file_write.contains("4")) {
-            mood_gson_Editor.putString("4", first_start_set).apply();
-        }
-        if (!gson_file_write.contains("5")) {
-            mood_gson_Editor.putString("5", first_start_set).apply();
-        }
-        if (!gson_file_write.contains("5")) {
-            mood_gson_Editor.putString("5", first_start_set).apply();
-        }
-        if (!gson_file_write.contains("6")) {
-            mood_gson_Editor.putString("6", first_start_set).apply();
-        }
-
-        if (!gson_file_write.contains("7")) {
-            mood_gson_Editor.putString("7", first_start_set).apply();
+        for(int i=1; i<8;i++) {
+            if (i==1 && !gson_file_write.contains(String.valueOf(i))) {
+                mood_gson_Editor.putString(String.valueOf(i), mood_data_gson).apply();
+            }
+            if (i > 1 && !gson_file_write.contains(String.valueOf(i))) {
+                mood_gson_Editor.putString(String.valueOf(i), first_start_set).apply();
+            }
         }
         //here is the code behavior to handle data about change date if we change the day
         // if we change the day the day i must switch the data contained to key 1 to the 2 and the
