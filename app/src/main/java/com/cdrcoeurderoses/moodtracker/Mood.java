@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 
-public class MoodManager extends AppCompatActivity {
+public class Mood {
     //this class handle all the property and method about the mood
 
     private String mood_name;
@@ -21,7 +21,7 @@ public class MoodManager extends AppCompatActivity {
     private String mood_date;
 
 
-    public MoodManager(){
+    public Mood(){
 
     }
 

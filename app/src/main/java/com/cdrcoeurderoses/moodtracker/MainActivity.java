@@ -29,8 +29,9 @@ public class MainActivity extends AppCompatActivity {
     //object mood created to prepare the record of data
 
 
-    final MoodManager mood_manager = new MoodManager();
+    final Mood mood_manager = new Mood();
 
+        //initialiser une liste 5 mood en faisant leur sélection via le scroll + compteur
 
 
 
@@ -267,7 +268,7 @@ public class MainActivity extends AppCompatActivity {
         String gson_file_read = getSharedPreferences("mood_file",MODE_PRIVATE).getString("1", "");
         //i put all in a string
         String mood_data_json = gson.fromJson(gson_file_read, String.class);
-        // i make the string workable to manage data with method of MoodManager
+        // i make the string workable to manage data with method of Mood
         String[] many_gson_array = mood_manager.mood_ready_read(mood_data_json);
        // Toast.makeText(getApplicationContext(), "Donnée non enregistré " + many_gson_array[7], Toast.LENGTH_LONG).show();
         return  many_gson_array[7];

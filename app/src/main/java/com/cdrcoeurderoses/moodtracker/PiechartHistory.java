@@ -1,10 +1,8 @@
 package com.cdrcoeurderoses.moodtracker;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
@@ -37,7 +35,7 @@ public class PiechartHistory extends AppCompatActivity {
         piechart_history.setDescription(mood_info);
 
         // i need take mood date from data file
-        MoodManager mood_manager = new MoodManager();
+        Mood mood_manager = new Mood();
         Gson gson = new Gson();
         String gson_file_read = getSharedPreferences("mood_file",MODE_PRIVATE).getString("1", "");
         String mood_data_json = gson.fromJson(gson_file_read, String.class);
