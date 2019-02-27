@@ -21,8 +21,9 @@ public class PiechartHistory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 
+
         setContentView(R.layout.activity_piechart);
-       PieChart piechart_history = findViewById(R.id.piechart_drawing);
+        PieChart piechart_history = findViewById(R.id.piechart_drawing);
         //i use the method which set the percentage format value
         piechart_history.setUsePercentValues(true);
 
@@ -31,71 +32,54 @@ public class PiechartHistory extends AppCompatActivity {
         mood_info.setText("Niveau d'intentisé de chacune de vos humeurs sur les 7 derniers jours");
         mood_info.setTextSize(13f);
 
-        //i add the description in the layout
+                            //i add the description in the layout
         piechart_history.setDescription(mood_info);
 
-        // i need take mood date from data file
+        // i need take mood date from data file and put them all in an array
+
         Mood mood_manager = new Mood();
         Gson gson = new Gson();
-        String gson_file_read = getSharedPreferences("mood_file",MODE_PRIVATE).getString("1", "");
-        String mood_data_json = gson.fromJson(gson_file_read, String.class);
-        String[] many_gson_array = mood_manager.mood_ready_read(mood_data_json);
+        String gson_file_read;
+        String mood_data_gson;
 
-        String gson_file_read_2 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("2", "");
-        String mood_data_json_2 = gson.fromJson(gson_file_read_2, String.class);
-        String[] many_gson_array_2 = mood_manager.mood_ready_read(mood_data_json_2);
+        String[][] array_many_gson = new String[7][];
 
+        int i=0;
+        while(i<7) {
 
-        String gson_file_read_3 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("3", "");
-        String mood_data_json_3 = gson.fromJson(gson_file_read_3, String.class);
-        String[] many_gson_array_3 = mood_manager.mood_ready_read(mood_data_json_3);
-
-        String gson_file_read_4 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("4", "");
-        String mood_data_json_4 = gson.fromJson(gson_file_read_4, String.class);
-        String[] many_gson_array_4 = mood_manager.mood_ready_read(mood_data_json_4);
-
-        String gson_file_read_5 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("5", "");
-        String mood_data_json_5 = gson.fromJson(gson_file_read_5, String.class);
-        String[] many_gson_array_5 = mood_manager.mood_ready_read(mood_data_json_5);
-
-        String gson_file_read_6 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("6", "");
-        String mood_data_json_6 = gson.fromJson(gson_file_read_6, String.class);
-        String[] many_gson_array_6 = mood_manager.mood_ready_read(mood_data_json_6);
-
-        String gson_file_read_7 = getSharedPreferences("mood_file",MODE_PRIVATE).getString("7", "");
-        String mood_data_json_7 = gson.fromJson(gson_file_read_7, String.class);
-        String[] many_gson_array_7 = mood_manager.mood_ready_read(mood_data_json_7);
+            gson_file_read = getSharedPreferences("mood_file", MODE_PRIVATE).getString(String.valueOf(i + 1), "");
+            mood_data_gson = gson.fromJson(gson_file_read, String.class);
+            array_many_gson[i] = mood_manager.mood_ready_read(mood_data_gson); i++;
+        }
 
         //need to make a calcul, any time i find a relative color in a tab i add the value to relative variable
         // in a loop
         float yellow=0, green=0, blue=0, grey=0, red=0;
-        String[][] array_many_gson_array = {many_gson_array, many_gson_array_2,many_gson_array_3, many_gson_array_4
-        , many_gson_array_5, many_gson_array_6, many_gson_array_7};
+        i=0;
+        while (i<7){
 
-        for(int i=0; i<7;i++) {
-
-            if(array_many_gson_array[i][5].contentEquals("#EAE108"))
+            if(array_many_gson[i][5].contentEquals("#EAE108"))
             {
                 yellow+=1;
 
             }
-            if(array_many_gson_array[i][5].contentEquals("#65D164"))
+            if(array_many_gson[i][5].contentEquals("#65D164"))
             {
                 green+=1;
             }
-            if(array_many_gson_array[i][5].contentEquals("#2663EE"))
+            if(array_many_gson[i][5].contentEquals("#2663EE"))
             {
                 blue+=1;
             }
-            if(array_many_gson_array[i][5].contentEquals("#6B6C6F"))
+            if(array_many_gson[i][5].contentEquals("#6B6C6F"))
             {
                 grey+=1;
             }
-            if(array_many_gson_array[i][5].contentEquals("#D12A2B"))
+            if(array_many_gson[i][5].contentEquals("#D12A2B"))
             {
                 red +=1;
             }
-
+            i++;
         }
 
         //I select the number of total mood which exist in purpose to have have clear data, if a variable is superior than 0 that mean we can use its
