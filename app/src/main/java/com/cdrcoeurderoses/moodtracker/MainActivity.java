@@ -108,10 +108,16 @@ public class MainActivity extends AppCompatActivity {
         //for sad mood
         alertDialogMood(btSad,"Etes vous vraiment de très mauvaise humeur ?");
 
+        //If the user don't press the button in a day we must set the defaut value
+        if(mood_name == null && mood_Color==null)
+        {
+            mood_Color="#EAE108"; mood_name="Super bonne humeur";
+            //and we update the key 0
+            launcher_mood_data();
+        }
+
 
         //now i need to handle the button which have to record the possible comment of the user about his mood
-
-
 
         ImageButton btAddComment = findViewById(R.id.AddComment);
         btAddComment.setOnClickListener(new View.OnClickListener() {
@@ -262,7 +268,7 @@ public class MainActivity extends AppCompatActivity {
     public String most_recent_date_recorded()
     {
         Gson gson = new Gson();
-        String gson_file_read = getSharedPreferences("mood_file",MODE_PRIVATE).getString("1", "");
+        String gson_file_read = getSharedPreferences("mood_file",MODE_PRIVATE).getString("0", "");
         //i put all in a string
         String mood_data_json = gson.fromJson(gson_file_read, String.class);
         // i make the string workable to manage data with method of Mood
@@ -295,23 +301,28 @@ public class MainActivity extends AppCompatActivity {
         String mood_data_gson = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
 
 
+
+
         // i test if the keys don't exist i don't initialise them
         // and with a set of defaut value except key 1
         String first_start_set = gson_manager.toJson("{\"mood_name\":\"first_launch_application\",\"" +
                 "mood_sentence\":\" \",\"mood_color\":\" \",\"mood_date\":\" \"}");
 
 
-        for(int i=1; i<8;i++) {
-            if (i==1 && !gson_file_write.contains(String.valueOf(i))) {
+        //i need to create 8 keys even if it' about 7 days data
+        //we must record the data of the current day to be ready to switch to the yesterday data
+        //the choice selected in the current day must not be showed but we need to record that
+        //current day will always be at the key 0
+        for(int i=0; i<8;i++) {
+            if (i==0 && !gson_file_write.contains(String.valueOf(i))) {
                 mood_gson_Editor.putString(String.valueOf(i), mood_data_gson).apply();
             }
-            if (i > 1 && !gson_file_write.contains(String.valueOf(i))) {
+            if (i > 0 && !gson_file_write.contains(String.valueOf(i))) {
                 mood_gson_Editor.putString(String.valueOf(i), first_start_set).apply();
             }
         }
         //here is the code behavior to handle data about change date if we change the day
-        // if we change the day the day i must switch the data contained to key 1 to the 2 and the
-        // data of key 2 to the 3 and the same way for the rest
+
         if(!string_mood_date.contentEquals(most_recent_date_recorded()))
         {
             Toast.makeText(getApplicationContext(), "Comparaison date --- " + most_recent_date_recorded()+" AND "+string_mood_date, Toast.LENGTH_LONG).show();
@@ -322,8 +333,8 @@ public class MainActivity extends AppCompatActivity {
             //so tab size is six
 
             String[] array_of_mood;
-            String current_iteration_data;//to recort the current string mood of iteration
-            for(int i=7; i>1;i--)
+            String current_iteration_data;//to record the current string mood of iteration
+            for(int i=7; i>0;i--)
             {
                 // I take Take data from the inferior number key  and put them in the superior number key
 
@@ -334,7 +345,6 @@ public class MainActivity extends AppCompatActivity {
                 array_of_mood = mood_manager.mood_ready_read(mood_data_gson_superior_key);
                 //next step
                 mood_manager.record_ManyData(array_of_mood[1],array_of_mood[3],array_of_mood[5],array_of_mood[7]);
-                //mood_manager.record_ManyData(many_gson_array_7[1],many_gson_array_7[5],many_gson_array_7[7]);
                 // next
                 current_iteration_data = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
                 //and record
@@ -343,8 +353,8 @@ public class MainActivity extends AppCompatActivity {
 
         }
         //always put the record instruction after the record of other keys the old data of key one will be erased
-        //and the key 2 will not take it but gonna take the new data as key
-        mood_gson_Editor.putString("1", mood_data_gson).apply();
+        //and the key 1 will not take it but gonna take the new data as key
+        mood_gson_Editor.putString("0", mood_data_gson).apply();
         mood_sentence="";
     }
 

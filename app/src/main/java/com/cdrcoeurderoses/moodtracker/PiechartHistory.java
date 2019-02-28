@@ -47,7 +47,7 @@ public class PiechartHistory extends AppCompatActivity {
         int i=0;
         while(i<7) {
 
-            gson_file_read = getSharedPreferences("mood_file", MODE_PRIVATE).getString(String.valueOf(i + 1), "");
+            gson_file_read = getSharedPreferences("mood_file", MODE_PRIVATE).getString(String.valueOf(i+1), "");
             mood_data_gson = gson.fromJson(gson_file_read, String.class);
             array_many_gson[i] = mood_manager.mood_ready_read(mood_data_gson); i++;
         }

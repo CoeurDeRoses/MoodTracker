@@ -62,7 +62,6 @@ public class MHistoryMood extends AppCompatActivity {
 
         Gson gson = new Gson();
         String gson_file_read, mood_data_gson;
-        String showInToast= "";
 
         //the array of mood data
         String[][] array_Many_Gson = new String[7][];
