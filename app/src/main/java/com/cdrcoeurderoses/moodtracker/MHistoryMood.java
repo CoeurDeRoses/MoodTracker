@@ -69,7 +69,7 @@ public class MHistoryMood extends AppCompatActivity {
          // i create the array which show the right string value about how many time passed since the mood
         // recorded in a day
 
-        String[] array_time_textview ={"Hier","Avant hier","Il y'a 2 jours","Il y'a 3 jour","Il y'a 4 jours"
+        String[] array_time_textview ={"Hier","Avant hier","Il y'a 3 jour","Il y'a 4 jours"
                     ,"Il y'a 5 jours","Il y'a 6 jours","Il y'a 1 semaine"};
 
         while(i<7)
