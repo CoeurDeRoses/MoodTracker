@@ -64,13 +64,14 @@ public class MHistoryMood extends AppCompatActivity {
         String gson_file_read, mood_data_gson;
 
         //the array of mood data
-        String[][] array_Many_Gson = new String[7][];
+        final String[][] array_Many_Gson = new String[7][];
          int i=0;
          // i create the array which show the right string value about how many time passed since the mood
         // recorded in a day
 
         String[] array_time_textview ={"Hier","Avant hier","Il y'a 3 jour","Il y'a 4 jours"
                     ,"Il y'a 5 jours","Il y'a 6 jours","Il y'a 1 semaine"};
+
 
         while(i<7)
         {
@@ -85,13 +86,15 @@ public class MHistoryMood extends AppCompatActivity {
             if(!array_Many_Gson[i][3].contentEquals("" ) && !array_Many_Gson[i][3].contentEquals(" " ) && !array_Many_Gson[i][3].contentEquals("null")) {
                 array_buttons[i].setVisibility(View.VISIBLE);
                 //and i allow the user to press the button to show the Toast message about his comment
-                /*
-                show_comment.setOnClickListener(new View.OnClickListener() {
+
+                final int finalI = i;
+                array_buttons[i].setOnClickListener(new View.OnClickListener() {
+
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), array_Many_Gson[i][3]+" first", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), array_Many_Gson[finalI][3], Toast.LENGTH_LONG).show();
                     }
-                });*/
+                });
             }
             else{
                 array_buttons[i].setVisibility(View.INVISIBLE);}
