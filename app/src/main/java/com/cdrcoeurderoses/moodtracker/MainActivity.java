@@ -260,23 +260,42 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
     /**
-     * this method return the most recent date of data recorded in order to check if we need to update if we change the date
-     * compare the most recent data and the date provide by the android system is enough for that
+     * this method is used to handle the case that if the user didnt opened the app since
+     * 2 days or more, we must update the data file and switch the mood as much as days gone
      * @return
      */
-    public String most_recent_date_recorded()
+    public int update_as_much_as_needed()
     {
-        Gson gson = new Gson();
-        String gson_file_read = getSharedPreferences("mood_file",MODE_PRIVATE).getString("0", "");
-        //i put all in a string
-        String mood_data_json = gson.fromJson(gson_file_read, String.class);
-        // i make the string workable to manage data with method of Mood
-        String[] many_gson_array = mood_manager.mood_ready_read(mood_data_json);
-       // Toast.makeText(getApplicationContext(), "Donnée non enregistré " + many_gson_array[7], Toast.LENGTH_LONG).show();
-        return  many_gson_array[7];
+        Date today = new Date();
+        mood_date = new SimpleDateFormat("yyyyMMdd");//the current date
+        String string_mood_date= mood_date.format(today);
+
+
+        //Json way
+        Gson gson_manager = new Gson();
+        //for the file one
+        String last_date_file = getSharedPreferences("mood_file",MODE_PRIVATE).getString("0", "");
+
+        last_date_file = gson_manager.fromJson(last_date_file, String.class);
+        //Prepare the data for record
+        String[] array_of_mood = mood_manager.mood_ready_read(last_date_file);
+
+        //i convert the both date, current date and last date recorded from the file
+        int current_date = Integer.parseInt(string_mood_date), int_last_date_file = Integer.parseInt(array_of_mood[7]);
+        //lets make a subtraction, the difference of the calcul mean how many time we have to update the file and switch data
+        // in launch_mood_data()
+
+        int diff_date = current_date - int_last_date_file;
+        //the loop which determinate how many time
+
+        return diff_date;
     }
 
+    /**
+     * This method update the mood data when it needed
+     */
     public void launcher_mood_data()
     {
         //and here i create the variable to manage date input in the file by using method of a
@@ -288,10 +307,10 @@ public class MainActivity extends AppCompatActivity {
 
         //Date and SimpleDateFormat implemented to take and prepare the current date to be recorded
         Date today = new Date();
-        mood_date = new SimpleDateFormat("ddMMyy");//the current date
+        mood_date = new SimpleDateFormat("yyyyMMdd");//the current date
         String string_mood_date= mood_date.format(today);
 
-        mood_manager.record_ManyData(mood_name,mood_sentence,mood_Color,string_mood_date);
+        mood_manager.record_ManyData(mood_name,mood_sentence,mood_Color,string_mood_date,"user");
 
         //Json way
         Gson gson_manager = new Gson();
@@ -299,8 +318,6 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences gson_file_write = getSharedPreferences("mood_file", MODE_PRIVATE);
         SharedPreferences.Editor mood_gson_Editor = gson_file_write.edit();
         String mood_data_gson = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
-
-
 
 
         // i test if the keys don't exist i don't initialise them
@@ -322,33 +339,42 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         //here is the code behavior to handle data about change date if we change the day
-
-        if(!string_mood_date.contentEquals(most_recent_date_recorded()))
+        if(update_as_much_as_needed()>0)
         {
-            Toast.makeText(getApplicationContext(), "Comparaison date --- " + most_recent_date_recorded()+" AND "+string_mood_date, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Comparaison date ---AND "+string_mood_date, Toast.LENGTH_LONG).show();
             // we must always start the process from the last-1 to the recent just before its data
             // and we repeat the same until the second i also code the deserealisation process first and
             // the serealisation process after
             //key 1 is always set by the user so i don't need to to update that key
             //so tab size is six
 
-            String[] array_of_mood;
-            String current_iteration_data;//to record the current string mood of iteration
-            for(int i=7; i>0;i--)
-            {
-                // I take Take data from the inferior number key  and put them in the superior number key
+            for(int j = 0; j< update_as_much_as_needed(); j++) {
+                String[] array_of_mood;
+                String current_iteration_data;//to record the current string mood of iteration
+                for (int a = 7; a > 0; a--) {
+                    // I take Take data from the inferior number key  and put them in the superior number key
 
-                String gson_read_from_inferior_key = getSharedPreferences("mood_file",MODE_PRIVATE).getString(String.valueOf(i-1), "");
+                    String gson_read_from_inferior_key = getSharedPreferences("mood_file", MODE_PRIVATE).getString(String.valueOf(a - 1), "");
 
-                String mood_data_gson_superior_key = gson_manager.fromJson(gson_read_from_inferior_key, String.class);
-                //Prepare the data for record
-                array_of_mood = mood_manager.mood_ready_read(mood_data_gson_superior_key);
-                //next step
-                mood_manager.record_ManyData(array_of_mood[1],array_of_mood[3],array_of_mood[5],array_of_mood[7]);
-                // next
-                current_iteration_data = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
-                //and record
-                mood_gson_Editor.putString(String.valueOf(i),current_iteration_data).apply();
+                    String mood_data_gson_superior_key = gson_manager.fromJson(gson_read_from_inferior_key, String.class);
+                    //Prepare the data for record
+                    array_of_mood = mood_manager.mood_ready_read(mood_data_gson_superior_key);
+                    //next step
+
+                    //i need to put condition which set defaut value for the days gone since the time the application
+                    // didn't get opened by the user or just opened with set mood, when i = 1
+                    //if the app didn't get opened since yesterday i set defaut value
+
+                    if(a==1 && !array_of_mood[9].equals("user"))
+                    mood_manager.record_ManyData("Super bonne humeur", "", "#EAE108", string_mood_date,"app");
+
+                    else
+                    mood_manager.record_ManyData(array_of_mood[1], array_of_mood[3], array_of_mood[5], array_of_mood[7],"user");
+                    // next
+                    current_iteration_data = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
+                    //and record
+                    mood_gson_Editor.putString(String.valueOf(a), current_iteration_data).apply();
+                }
             }
 
         }

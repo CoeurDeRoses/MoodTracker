@@ -10,6 +10,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+//This class is currently unused
 public class Prefs {
 
     private static Prefs instance;

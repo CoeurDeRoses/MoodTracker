@@ -2,12 +2,17 @@ package com.cdrcoeurderoses.moodtracker;
 
 
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +22,7 @@ import com.google.gson.Gson;
 import java.lang.reflect.Array;
 
 public class MHistoryMood extends AppCompatActivity {
-
+    double deviceWidth,deviceHeight;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,7 +48,21 @@ public class MHistoryMood extends AppCompatActivity {
         //to the components of the layout history. I put the name of the file i want data and i put the key needed
         //Here the component can now take the value from the file
 
-        // i create aswell an array of button about comment
+
+
+        //I take the frame data of each label to set the right width relative to the mood inside
+        FrameLayout frame1 = findViewById(R.id.frame1);
+        FrameLayout frame2 = findViewById(R.id.frame2);
+        FrameLayout frame3 = findViewById(R.id.frame3);
+        FrameLayout frame4 = findViewById(R.id.frame4);
+        FrameLayout frame5 = findViewById(R.id.frame5);
+        FrameLayout frame6 = findViewById(R.id.frame6);
+        FrameLayout frame7 = findViewById(R.id.frame7);
+
+        FrameLayout[] array_FrameLayout = {frame1, frame2, frame3, frame4,frame5,frame6,frame7};
+
+
+        // i create as well an array of button about comment
 
         Button show_comment= findViewById(R.id.show_comm);
         Button show_comment_2= findViewById(R.id.show_comm_2);
@@ -71,8 +90,6 @@ public class MHistoryMood extends AppCompatActivity {
 
         String[] array_time_textview ={"Hier","Avant hier","Il y'a 3 jour","Il y'a 4 jours"
                     ,"Il y'a 5 jours","Il y'a 6 jours","Il y'a 1 semaine"};
-
-
         while(i<7)
         {
 
@@ -102,7 +119,9 @@ public class MHistoryMood extends AppCompatActivity {
 
             if(!array_Many_Gson[i][1].contentEquals("first_launch_application")) {
                 array_Textview[i].setBackgroundColor(mood_rectangle_color(array_Many_Gson[i][5]));
-                array_Textview[i].setText(array_time_textview[i]);
+                array_Textview[i].setText(array_time_textview[i]+"  "+array_Many_Gson[i][7]);
+                SetDeviceWidth(array_Many_Gson[i][5],array_FrameLayout[i]);
+
             }
             i++;
         }
@@ -144,26 +163,44 @@ public class MHistoryMood extends AppCompatActivity {
     /**
      * The method which set the right weight to the rectangle
      * no need to modify yellow mood, always at full weight
-     * @param Hexadecimal_color
-     * @return
      */
-    public int mood_DP(String Hexadecimal_color)
-    {
+    private void SetDeviceWidth(String current_color, FrameLayout Current_Frame){
 
-        int mood_dp=0;
-        if(Hexadecimal_color=="#65D164")
-            mood_dp=200;
+        //The size is allocated proportionally. An id must be assigned to each item containing the mood. The FrameLayout has the Textview.
+        //First you have to get the width and the height of the device having lit the application, dynamically
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        WindowManager windowmanager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        windowmanager.getDefaultDisplay().getMetrics(displayMetrics);
+        deviceWidth = displayMetrics.widthPixels;
+        deviceHeight = displayMetrics.heightPixels;
 
-        if(Hexadecimal_color=="#2663EE")
-            mood_dp=150;
 
-        if(Hexadecimal_color=="#6B6C6F")
-            mood_dp=100;
+        // and retrieve the values ​​in width and height variables.
+        // Then we set 4 relative percentages for each mood, the yellow mood always taking the
+        // total width of the screen needless to do anything when an item falls on yellow. The table will therefore have 4 elements.
+        double [] viewSizeMultiplier = {0.2, 0.4, 0.6, 0.8};
+        switch (current_color) {
 
-        if(Hexadecimal_color=="#D12A2B")
-            mood_dp=50;
+            //And here we set the right dimensions relative to the right color
+            case "#65D164": Current_Frame.setLayoutParams
+                    ( new LinearLayout.LayoutParams((int)(deviceWidth*viewSizeMultiplier[3]),(int)deviceHeight/7));
+                break;
 
-        return mood_dp;
+            case "#2663EE": Current_Frame.setLayoutParams
+                    ( new LinearLayout.LayoutParams((int)(deviceWidth*viewSizeMultiplier[2]),(int)deviceHeight/7));
+                break;
+
+            case "#6B6C6F": Current_Frame.setLayoutParams
+                    ( new LinearLayout.LayoutParams((int)(deviceWidth*viewSizeMultiplier[1]),(int)deviceHeight/7));
+                break;
+
+            case "#D12A2B": Current_Frame.setLayoutParams
+                    ( new LinearLayout.LayoutParams((int)(deviceWidth*viewSizeMultiplier[0]),(int)deviceHeight/7));
+                break;
+
+            default:
+                break;
+        }
     }
 
 

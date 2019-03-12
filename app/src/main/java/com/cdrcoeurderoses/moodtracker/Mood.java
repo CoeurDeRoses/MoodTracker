@@ -20,6 +20,9 @@ public class Mood {
     private String mood_color;
     private String mood_date;
 
+    //to determinate if the value is set by the application or the user
+    private String kind;
+
 
     public Mood(){
 
@@ -39,6 +42,9 @@ public class Mood {
 
     public void setMood_sentence(String mood_sentence) {
         this.mood_sentence = mood_sentence;
+    }
+    public void setKind(String kind) {
+        this.kind = kind;
     }
 
     public String getMood_color() {
@@ -64,12 +70,13 @@ public class Mood {
      * @param mood_color
      * @param mood_date
      */
-    public void record_ManyData(String mood_name, String mood_sentence,String mood_color, String mood_date )
+    public void record_ManyData(String mood_name, String mood_sentence,String mood_color, String mood_date, String kind )
     {
         setMood_name(mood_name);
         setMood_sentence(mood_sentence);
         setMood_color(mood_color);
         setMood_date(mood_date);
+        setKind(kind);
     }
 
     public void record_ManyData(String mood_name,String mood_color, String mood_date )
@@ -92,7 +99,8 @@ public class Mood {
         mood_list += "\"mood_name\":\""+ mood_name+"\",";
         mood_list += "\"mood_sentence\":\""+ mood_sentence+"\",";
         mood_list += "\"mood_color\":\""+ mood_color+"\",";
-        mood_list += "\"mood_date\":\""+ mood_date+"\"}";
+        mood_list += "\"mood_date\":\""+ mood_date+"\",";
+        mood_list += "\"kind\":\""+ kind+"\"}";
 
         return mood_list;
     }

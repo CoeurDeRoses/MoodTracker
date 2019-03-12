@@ -24,6 +24,7 @@
             android:orientation="vertical">
 
             <FrameLayout
+                android:id="@+id/frame7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -48,6 +49,7 @@
             </FrameLayout>
 
             <FrameLayout
+            android:id="@+id/frame6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -72,6 +74,7 @@
         </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/frame5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -96,6 +99,7 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/frame4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -120,6 +124,7 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/frame3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -144,6 +149,7 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/frame2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -168,6 +174,7 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/frame1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
