@@ -47,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
     //The following variable will be used to make dialog box exist
     private MainActivity currentActivity;
-    //The onCreate method is called when the activity is created
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,8 +65,6 @@ public class MainActivity extends AppCompatActivity {
         ImageButton goHistory =  findViewById(R.id.GoHistory);
         // The button to go in percentage history mood
         Button goPiechart = findViewById(R.id.piechart_button);
-
-        launcher_mood_data();
 
         // I call the method setOnClickListener to describe what happen when we press Gohistory button
         // Listener object contain a method which will be call when event happen
@@ -107,6 +106,9 @@ public class MainActivity extends AppCompatActivity {
         alertDialogMood(btDisappointed,"Etes vous vraiment de mauvaise humeur ?");
         //for sad mood
         alertDialogMood(btSad,"Etes vous vraiment de très mauvaise humeur ?");
+
+
+        launcher_mood_data();
 
         //If the user don't press the button in a day we must set the defaut value
         if(mood_name == null && mood_Color==null)
@@ -242,7 +244,6 @@ public class MainActivity extends AppCompatActivity {
                 alertMood.setPositiveButton("OUI", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
                         launcher_mood_data();
                         //Message of confirmation
                         Toast.makeText(getApplicationContext(), "Données enregistré ", Toast.LENGTH_SHORT).show();
@@ -310,7 +311,8 @@ public class MainActivity extends AppCompatActivity {
         mood_date = new SimpleDateFormat("yyyyMMdd");//the current date
         String string_mood_date= mood_date.format(today);
 
-        mood_manager.record_ManyData(mood_name,mood_sentence,mood_Color,string_mood_date,"user");
+
+        mood_manager.record_ManyData(mood_name,mood_sentence,mood_Color,string_mood_date);
 
         //Json way
         Gson gson_manager = new Gson();
@@ -349,11 +351,19 @@ public class MainActivity extends AppCompatActivity {
             //so tab size is six
 
             for(int j = 0; j< update_as_much_as_needed(); j++) {
-                String[] array_of_mood;
-                String current_iteration_data;//to record the current string mood of iteration
-                for (int a = 7; a > 0; a--) {
-                    // I take Take data from the inferior number key  and put them in the superior number key
 
+                /*if(j==1) {
+                    mood_manager.record_ManyData
+                            ("Super bonne humeur", "", "#EAE108", string_mood_date);
+                    String default_string =gson_manager.toJson(mood_manager.mood_list_data_gson_string());
+                    mood_gson_Editor.putString("0", default_string).apply();
+                }*/
+
+                for (int a = 7; a > 0; a--) {
+
+                    String[] array_of_mood;
+                    String current_iteration_data;//to record the current string mood of iteration
+                    // I take Take data from the inferior number key  and put them in the superior number key
                     String gson_read_from_inferior_key = getSharedPreferences("mood_file", MODE_PRIVATE).getString(String.valueOf(a - 1), "");
 
                     String mood_data_gson_superior_key = gson_manager.fromJson(gson_read_from_inferior_key, String.class);
@@ -365,16 +375,15 @@ public class MainActivity extends AppCompatActivity {
                     // didn't get opened by the user or just opened with set mood, when i = 1
                     //if the app didn't get opened since yesterday i set defaut value
 
-                    if(a==1 && !array_of_mood[9].equals("user"))
-                    mood_manager.record_ManyData("Super bonne humeur", "", "#EAE108", string_mood_date,"app");
+                    mood_manager.record_ManyData(array_of_mood[1], array_of_mood[3], array_of_mood[5], array_of_mood[7]);
 
-                    else
-                    mood_manager.record_ManyData(array_of_mood[1], array_of_mood[3], array_of_mood[5], array_of_mood[7],"user");
                     // next
                     current_iteration_data = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
                     //and record
                     mood_gson_Editor.putString(String.valueOf(a), current_iteration_data).apply();
                 }
+
+
             }
 
         }

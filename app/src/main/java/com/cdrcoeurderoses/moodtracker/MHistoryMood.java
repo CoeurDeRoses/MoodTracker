@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,15 +52,15 @@ public class MHistoryMood extends AppCompatActivity {
 
 
         //I take the frame data of each label to set the right width relative to the mood inside
-        FrameLayout frame1 = findViewById(R.id.frame1);
-        FrameLayout frame2 = findViewById(R.id.frame2);
-        FrameLayout frame3 = findViewById(R.id.frame3);
-        FrameLayout frame4 = findViewById(R.id.frame4);
-        FrameLayout frame5 = findViewById(R.id.frame5);
-        FrameLayout frame6 = findViewById(R.id.frame6);
-        FrameLayout frame7 = findViewById(R.id.frame7);
+        RelativeLayout frame1 = findViewById(R.id.frame1);
+        RelativeLayout frame2 = findViewById(R.id.frame2);
+        RelativeLayout frame3 = findViewById(R.id.frame3);
+        RelativeLayout frame4 = findViewById(R.id.frame4);
+        RelativeLayout frame5 = findViewById(R.id.frame5);
+        RelativeLayout frame6 = findViewById(R.id.frame6);
+        RelativeLayout frame7 = findViewById(R.id.frame7);
 
-        FrameLayout[] array_FrameLayout = {frame1, frame2, frame3, frame4,frame5,frame6,frame7};
+        RelativeLayout[] array_FrameLayout = {frame1, frame2, frame3, frame4,frame5,frame6,frame7};
 
 
         // i create as well an array of button about comment
@@ -102,6 +103,7 @@ public class MHistoryMood extends AppCompatActivity {
 
             if(!array_Many_Gson[i][3].contentEquals("" ) && !array_Many_Gson[i][3].contentEquals(" " ) && !array_Many_Gson[i][3].contentEquals("null")) {
                 array_buttons[i].setVisibility(View.VISIBLE);
+
                 //and i allow the user to press the button to show the Toast message about his comment
 
                 final int finalI = i;
@@ -119,7 +121,7 @@ public class MHistoryMood extends AppCompatActivity {
 
             if(!array_Many_Gson[i][1].contentEquals("first_launch_application")) {
                 array_Textview[i].setBackgroundColor(mood_rectangle_color(array_Many_Gson[i][5]));
-                array_Textview[i].setText(array_time_textview[i]+"  "+array_Many_Gson[i][7]);
+                array_Textview[i].setText(array_time_textview[i]);
                 SetDeviceWidth(array_Many_Gson[i][5],array_FrameLayout[i]);
 
             }
@@ -164,7 +166,7 @@ public class MHistoryMood extends AppCompatActivity {
      * The method which set the right weight to the rectangle
      * no need to modify yellow mood, always at full weight
      */
-    private void SetDeviceWidth(String current_color, FrameLayout Current_Frame){
+    private void SetDeviceWidth(String current_color, RelativeLayout Current_Frame){
 
         //The size is allocated proportionally. An id must be assigned to each item containing the mood. The FrameLayout has the Textview.
         //First you have to get the width and the height of the device having lit the application, dynamically
