@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#fff9ec4f"
     tools:context=".MainFragment"
+    android:layout_gravity="center_vertical"
     android:id="@+id/layout_fragment">
 
     <ImageView
         android:id="@+id/fragMood"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="220dp"
-        android:layout_marginEnd="83dp"
+        android:layout_marginTop="200dp"
         android:layout_marginBottom="200dp"
+        android:layout_gravity="center_horizontal"
         android:background="@drawable/smiley_super_happy"
         android:contentDescription="@string/StringSuperHappy" />
 
-</RelativeLayout>
+</FrameLayout>

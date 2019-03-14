@@ -7,9 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -43,7 +41,7 @@ public class MainActivity extends AppCompatActivity{
 
 
 
-    private MediaPlayer playMusic;
+    private MediaPlayer playMusic = null;
 
     //To record the user choice i make a string variable which have to be put in each case
     // to receive the relative color mood_color and other userfull variable
@@ -73,7 +71,7 @@ public class MainActivity extends AppCompatActivity{
         and returns the corresponding view
          */
         //setContentView(R.layout.activity_main);
-        setContentView(R.layout.activity_main_2);
+        setContentView(R.layout.activity_main);
 
 
         this.configureViewPager();
@@ -117,7 +115,11 @@ public class MainActivity extends AppCompatActivity{
 
           @Override
           public void onPageSelected(int position) {
-                get_current_mood();
+
+              if(playMusic!=null)
+                  playMusic.stop();
+
+              get_current_mood();
           }
 
           @Override
@@ -173,7 +175,7 @@ public class MainActivity extends AppCompatActivity{
                 dialogAddComment.show();
             }
         });
-
+        //<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         //Here i put the button to allow users to share their mood to other by sending their mood from the application
         //with the intent way i will use Dialog.builder
         ImageButton btShare = findViewById(R.id.ShareMood);

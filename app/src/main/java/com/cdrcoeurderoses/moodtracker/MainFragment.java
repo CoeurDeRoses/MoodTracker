@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -57,7 +58,7 @@ public class MainFragment extends Fragment {
         View result = inflater.inflate(R.layout.fragment_main, container, false);
 
         // 4 - Get widgets from layout and serialise it
-        RelativeLayout rootView=  result.findViewById(R.id.layout_fragment);
+        FrameLayout rootView=  result.findViewById(R.id.layout_fragment);
         ImageView imageView = result.findViewById(R.id.fragMood);
 
         // 5 - Get data from Bundle (created in method newInstance)
