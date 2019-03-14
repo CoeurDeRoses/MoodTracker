@@ -2,10 +2,15 @@ package com.cdrcoeurderoses.moodtracker;
 
 
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,8 +25,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class MainActivity extends AppCompatActivity {
 
+
+public class MainActivity extends AppCompatActivity{
+
+    VerticalViewPager pager;
     //I import the Mediaplayer class to play the music
     //I will initialize the playmusic variable with each relative mp3 value
     // in button code after users press the buttons.
@@ -47,6 +55,11 @@ public class MainActivity extends AppCompatActivity {
 
     //The following variable will be used to make dialog box exist
     private MainActivity currentActivity;
+    private Context context;
+
+    //a boolean to determinate if the user set mood or not in a day
+    // if not the app dont put a default value so boolean get true
+
 
 
     @Override
@@ -59,7 +72,14 @@ public class MainActivity extends AppCompatActivity {
         The findViewById() takes as parameter the identifier of the view that interests us,
         and returns the corresponding view
          */
-        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_2);
+
+
+        this.configureViewPager();
+
+
+
         //launcher_mood_data();
         // I create the ImageButton needed to switch to history page
         ImageButton goHistory =  findViewById(R.id.GoHistory);
@@ -88,26 +108,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //here i Create the 5 buttons which allows to users to record their mood
-        //and to confirm with a little dialog message if they are really sure
-        ImageButton btSuperHappy = findViewById(R.id.buttonSuperHappy); ImageButton btHappy = findViewById(R.id.buttonHappy);
-        ImageButton btNormal = findViewById(R.id.buttonNormal); ImageButton btDisappointed = findViewById(R.id.buttonDisappointed);
-        ImageButton btSad = findViewById(R.id.buttonSad);
 
+      pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+          @Override
+          public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+          }
 
-        //For very happy mood
-        alertDialogMood(btSuperHappy,"Etes vous vraiment de très bonne humeur ?");
-        //For happy mood
-        alertDialogMood(btHappy,"Etes vous vraiment de bonne humeur ?");
-        //For normal mood
-        alertDialogMood(btNormal,"Etes vous vraiment d'une humeur normale ?");
-        //For disappointed mood
-        alertDialogMood(btDisappointed,"Etes vous vraiment de mauvaise humeur ?");
-        //for sad mood
-        alertDialogMood(btSad,"Etes vous vraiment de très mauvaise humeur ?");
+          @Override
+          public void onPageSelected(int position) {
+                get_current_mood();
+          }
 
+          @Override
+          public void onPageScrollStateChanged(int state) {
 
+          }
+      });
         launcher_mood_data();
 
         //If the user don't press the button in a day we must set the defaut value
@@ -192,74 +209,22 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+    private void configureViewPager() {
 
-
-    //The method which will be used for every button and show the relative question on the select mood.
-    // and the relative button
-    public void alertDialogMood ( ImageButton theButton, final String moodQuestion){
-
-        theButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //in the switch condition i will use the moodQuestion to determinate which music
-                // i have to launch with start() method from the MediaPlayer object
-                switch (moodQuestion)
-                {
-                    //hexadecimal of yellow, green, blue, grey and red and that following order are used.
-                    case "Etes vous vraiment de très bonne humeur ?":
-                        mood_Color = "#EAE108"; playMusic = MediaPlayer.create(getApplicationContext(),R.raw.sound_superhappy);playMusic.start();
-                        mood_name ="Super bonne humeur";
-                        break;
-
-                    case "Etes vous vraiment de bonne humeur ?":
-                        mood_Color = "#65D164"; playMusic = MediaPlayer.create(getApplicationContext(),R.raw.sound_happy); playMusic.start();
-                        mood_name ="Bonne humeur";
-                        break;
-
-                    case "Etes vous vraiment d'une humeur normale ?":
-                        mood_Color = "#2663EE"; playMusic = MediaPlayer.create(getApplicationContext(),R.raw.sound_normal); playMusic.start();
-                        mood_name ="Humeur normale";
-                        break;
-
-                    case "Etes vous vraiment de mauvaise humeur ?":
-                        mood_Color = "#6B6C6F"; playMusic = MediaPlayer.create(getApplicationContext(),R.raw.sound_disappointed); playMusic.start();
-                        mood_name ="Mauvaise humeur";
-                        break;
-
-                    case "Etes vous vraiment de très mauvaise humeur ?":
-                        mood_Color = "#D12A2B";playMusic = MediaPlayer.create(getApplicationContext(),R.raw.sound_sad); playMusic.start();
-                        mood_name ="Très mauvaise humeur";
-                        break;
-
-                    default: mood_Color="#EAE108"; mood_name="Super bonne humeur"; break;
-                }
-
-                /*I create a Builder Object which ask if the user want to confirm his mood and record that*/
-
-                AlertDialog.Builder alertMood = new AlertDialog.Builder(MainActivity.this);
-                //The name of the Dialogbox will be the mood selected
-                alertMood.setTitle(mood_name);
-                //The question of that dialogbox
-                alertMood.setMessage(moodQuestion);
-                alertMood.setPositiveButton("OUI", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        launcher_mood_data();
-                        //Message of confirmation
-                        Toast.makeText(getApplicationContext(), "Données enregistré ", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                alertMood.setNegativeButton("NON", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //Message of cancellation
-                        Toast.makeText(getApplicationContext(), "Données non enregistré", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                alertMood.show();
-            }
+        //i implement the color for the adapter
+        int[] array_colors={Color.parseColor("#EAE108"),
+                Color.parseColor("#65D164"),
+                        Color.parseColor("#2663EE"),
+                                Color.parseColor("#6B6C6F"),
+                                        Color.parseColor("#D12A2B")};
+        // 1 - Get ViewPager from layout
+        pager =  findViewById(R.id.activity_main_viewpager);
+        // 2 - Set Adapter PageAdapter and glue it together
+        pager.setAdapter(new AdapterFrag(getSupportFragmentManager(),array_colors) {
         });
     }
+
+
 
 
     /**
@@ -352,12 +317,6 @@ public class MainActivity extends AppCompatActivity {
 
             for(int j = 0; j< update_as_much_as_needed(); j++) {
 
-                /*if(j==1) {
-                    mood_manager.record_ManyData
-                            ("Super bonne humeur", "", "#EAE108", string_mood_date);
-                    String default_string =gson_manager.toJson(mood_manager.mood_list_data_gson_string());
-                    mood_gson_Editor.putString("0", default_string).apply();
-                }*/
 
                 for (int a = 7; a > 0; a--) {
 
@@ -393,4 +352,39 @@ public class MainActivity extends AppCompatActivity {
         mood_sentence="";
     }
 
+    public void get_current_mood()
+    {
+        int current_mood = pager.getCurrentItem();
+
+        switch (current_mood)
+        {
+            case 0:mood_Color = "#EAE108";playMusic = MediaPlayer.create(getApplicationContext(),R.raw.sound_superhappy);playMusic.start();
+
+                Toast.makeText(getApplicationContext(),"Très bonne humeur",Toast.LENGTH_SHORT).show();
+                mood_name ="Super bonne humeur"; break;
+
+            case 1:mood_Color = "#65D164";playMusic = MediaPlayer.create(getApplicationContext(),R.raw.sound_happy); playMusic.start();
+                Toast.makeText(getApplicationContext(),"Bonne humeur",Toast.LENGTH_SHORT).show();
+                mood_name ="Bonne humeur"; break;
+
+            case 2: mood_Color = "#2663EE";playMusic = MediaPlayer.create(getApplicationContext(),R.raw.sound_normal); playMusic.start();
+                Toast.makeText(getApplicationContext(),"Humeur normale",Toast.LENGTH_SHORT).show();
+                mood_name ="Humeur normale"; break;
+
+            case 3:  mood_Color = "#6B6C6F";playMusic = MediaPlayer.create(getApplicationContext(),R.raw.sound_disappointed); playMusic.start();
+                Toast.makeText(getApplicationContext(),"Mauvaise humeur",Toast.LENGTH_SHORT).show();
+                mood_name ="Mauvaise humeur";break;
+
+            case 4:mood_Color = "#D12A2B";playMusic = MediaPlayer.create(getApplicationContext(),R.raw.sound_sad); playMusic.start();
+                Toast.makeText(getApplicationContext(),"Très mauvaise  humeur",Toast.LENGTH_SHORT).show();
+                mood_name ="Très mauvaise humeur"; break;
+
+            default: break;
+        }
+        launcher_mood_data();
+    }
+
+    public Context getContext() {
+        return context;
+    }
 }

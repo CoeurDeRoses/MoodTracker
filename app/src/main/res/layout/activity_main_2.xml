@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<com.cdrcoeurderoses.moodtracker.VerticalViewPager
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/activity_main_viewpager"></com.cdrcoeurderoses.moodtracker.VerticalViewPager>
+
+
+    <ImageButton
+        android:id="@+id/ShareMood"
+        android:layout_width="0dp"
+        android:layout_height="68dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/share_mood"
+        android:contentDescription="@string/Sharebutton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/piechart_button"
+        app:layout_constraintStart_toEndOf="@+id/AddComment" />
+
+    <Button
+        android:id="@+id/piechart_button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="33dp"
+        android:background="@drawable/piechart"
+        app:layout_constraintBottom_toBottomOf="@+id/GoHistory"
+        app:layout_constraintEnd_toStartOf="@+id/GoHistory"
+        app:layout_constraintStart_toEndOf="@+id/ShareMood"
+        app:layout_constraintTop_toTopOf="@+id/GoHistory" />
+
+    <ImageButton
+
+        android:id="@+id/GoHistory"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/ic_history_black"
+        android:contentDescription="@string/StringForMoodHistory"
+        app:layout_constraintBottom_toBottomOf="@+id/ShareMood"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/piechart_button"
+        app:layout_constraintTop_toTopOf="@+id/ShareMood" />
+
+    <ImageButton
+        android:id="@+id/AddComment"
+        android:layout_width="0dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="33dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/ic_note_add_black"
+        android:contentDescription="@string/StringForAddCommentButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ShareMood"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
