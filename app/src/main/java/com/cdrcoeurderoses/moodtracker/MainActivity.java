@@ -53,12 +53,11 @@ public class MainActivity extends AppCompatActivity{
 
     //The following variable will be used to make dialog box exist
     private MainActivity currentActivity;
-    private Context context;
 
     //a boolean to determinate if the user set mood or not in a day
     // if not the app dont put a default value so boolean get true
 
-
+    boolean user_scrolled = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,14 +70,15 @@ public class MainActivity extends AppCompatActivity{
         and returns the corresponding view
          */
         //setContentView(R.layout.activity_main);
+
         setContentView(R.layout.activity_main);
 
 
         this.configureViewPager();
+        pager.setCurrentItem(1);
 
 
 
-        //launcher_mood_data();
         // I create the ImageButton needed to switch to history page
         ImageButton goHistory =  findViewById(R.id.GoHistory);
         // The button to go in percentage history mood
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity{
           public void onPageSelected(int position) {
 
               if(playMusic!=null)
-                  playMusic.stop();
+                  playMusic.stop(); user_scrolled = true;
 
               get_current_mood();
           }
@@ -129,10 +129,10 @@ public class MainActivity extends AppCompatActivity{
       });
         launcher_mood_data();
 
-        //If the user don't press the button in a day we must set the defaut value
-        if(mood_name == null && mood_Color==null)
+        //If the user don't scroll
+        if(mood_name == null)
         {
-            mood_Color="#EAE108"; mood_name="Super bonne humeur";
+            mood_Color="#65D164"; mood_name="Bonne humeur";
             //and we update the key 0
             launcher_mood_data();
         }
@@ -308,6 +308,7 @@ public class MainActivity extends AppCompatActivity{
             }
         }
         //here is the code behavior to handle data about change date if we change the day
+        int b =0;//to increase date for days app is not open
         if(update_as_much_as_needed()>0)
         {
             Toast.makeText(getApplicationContext(), "Comparaison date ---AND "+string_mood_date, Toast.LENGTH_LONG).show();
@@ -347,11 +348,26 @@ public class MainActivity extends AppCompatActivity{
 
             }
 
+            //The code to set defaut value for athe days when user dont open app or scroll the viewpager
+            //and i increase the date for each turn
+            int defaut_date = b + Integer.parseInt(string_mood_date) ;
+            mood_manager.record_ManyData("Bonne humeur", "", "#65D164", String.valueOf(defaut_date));
+
+            // next
+            String data = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
+            //and record
+            mood_gson_Editor.putString("0", data).apply();
+            b++;
+
         }
+
         //always put the record instruction after the record of other keys the old data of key one will be erased
         //and the key 1 will not take it but gonna take the new data as key
+        if(user_scrolled)
         mood_gson_Editor.putString("0", mood_data_gson).apply();
+
         mood_sentence="";
+        user_scrolled=false;
     }
 
     public void get_current_mood()
@@ -386,7 +402,4 @@ public class MainActivity extends AppCompatActivity{
         launcher_mood_data();
     }
 
-    public Context getContext() {
-        return context;
-    }
 }
