@@ -2,10 +2,10 @@ package com.cdrcoeurderoses.moodtracker;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.os.Bundle;
+import android.content.Context;
+import android.support.annotation.NonNull;
 import android.widget.Button;
 import android.widget.EditText;
-import android.support.v7.app.AppCompatActivity;
 
 import static com.cdrcoeurderoses.moodtracker.R.layout.activity_dialog_comment;
 
@@ -32,6 +32,10 @@ public class DialogComment extends Dialog {
         this.AddComment = findViewById(R.id.editTextComment);
 
 
+    }
+
+    public DialogComment(@NonNull Context context) {
+        super(context);
     }
 
     /**

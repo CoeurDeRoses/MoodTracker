@@ -121,7 +121,7 @@ public class MHistoryMood extends AppCompatActivity {
 
             if(!array_Many_Gson[i][1].contentEquals("first_launch_application")) {
                 array_Textview[i].setBackgroundColor(mood_rectangle_color(array_Many_Gson[i][5]));
-                array_Textview[i].setText(array_time_textview[i]);
+                array_Textview[i].setText(array_time_textview[i]+" "+array_Many_Gson[i][7]);
                 SetDeviceWidth(array_Many_Gson[i][5],array_FrameLayout[i]);
 
             }
@@ -137,7 +137,7 @@ public class MHistoryMood extends AppCompatActivity {
      */
     public int mood_rectangle_color(String Hexadecimal_color)
     {
-        int mood_color = 0;
+        int mood_color;
         switch (Hexadecimal_color)
         {
             case "#EAE108": //Yellow color
@@ -156,7 +156,7 @@ public class MHistoryMood extends AppCompatActivity {
                 mood_color = Color.parseColor(Hexadecimal_color);break;
 
             default: //Yellow color
-                mood_color = Color.parseColor("#EAE108");break;
+                mood_color = Color.parseColor("#65D164");break;
         }
 
         return mood_color;

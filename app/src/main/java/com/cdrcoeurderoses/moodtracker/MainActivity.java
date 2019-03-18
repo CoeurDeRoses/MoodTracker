@@ -1,8 +1,6 @@
 package com.cdrcoeurderoses.moodtracker;
 
 
-
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -308,18 +306,27 @@ public class MainActivity extends AppCompatActivity{
             }
         }
         //here is the code behavior to handle data about change date if we change the day
-        int b =0;//to increase date for days app is not open
-        if(update_as_much_as_needed()>0)
+         int number_days_gone = update_as_much_as_needed();
+        if(number_days_gone>0)
         {
-            Toast.makeText(getApplicationContext(), "Comparaison date ---AND "+string_mood_date, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Date "+string_mood_date, Toast.LENGTH_LONG).show();
             // we must always start the process from the last-1 to the recent just before its data
             // and we repeat the same until the second i also code the deserealisation process first and
             // the serealisation process after
             //key 1 is always set by the user so i don't need to to update that key
             //so tab size is six
 
-            for(int j = 0; j< update_as_much_as_needed(); j++) {
+            for(int j = 0; j< number_days_gone; j++) {
 
+//if            the loop has more than one turn i set the code for set default value for the day mood wasn't choose
+                //and for each day past i add one unit to be sure to have the right day
+                if(j>0)
+                {   int current_date = j+Integer.parseInt(string_mood_date);
+                    mood_manager.record_ManyData("Bonne humeur", "", "#65D164", String.valueOf(current_date));
+                    String default_mood = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
+                    //and record
+                    mood_gson_Editor.putString("0", default_mood).apply();
+                }
 
                 for (int a = 7; a > 0; a--) {
 
@@ -346,28 +353,20 @@ public class MainActivity extends AppCompatActivity{
                 }
 
 
+
+
             }
 
-            //The code to set defaut value for athe days when user dont open app or scroll the viewpager
-            //and i increase the date for each turn
-            int defaut_date = b + Integer.parseInt(string_mood_date) ;
-            mood_manager.record_ManyData("Bonne humeur", "", "#65D164", String.valueOf(defaut_date));
 
-            // next
-            String data = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
-            //and record
-            mood_gson_Editor.putString("0", data).apply();
-            b++;
 
         }
 
         //always put the record instruction after the record of other keys the old data of key one will be erased
         //and the key 1 will not take it but gonna take the new data as key
-        if(user_scrolled)
+
         mood_gson_Editor.putString("0", mood_data_gson).apply();
 
         mood_sentence="";
-        user_scrolled=false;
     }
 
     public void get_current_mood()
