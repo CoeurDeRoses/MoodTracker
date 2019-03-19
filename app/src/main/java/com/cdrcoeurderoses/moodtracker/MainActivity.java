@@ -158,6 +158,11 @@ public class MainActivity extends AppCompatActivity{
                         {
                             mood_sentence="";
                         }
+                        //else, If user wrote a comment i record this
+                        else
+                        {
+                            launcher_mood_data();
+                        }
 
                         dialogAddComment.cancel();
                     }
