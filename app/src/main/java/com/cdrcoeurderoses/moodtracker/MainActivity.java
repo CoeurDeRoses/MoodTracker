@@ -73,147 +73,16 @@ public class MainActivity extends AppCompatActivity{
 
 
         this.configureViewPager();
+        //to set the happy mood as default smiley to be focused when app is open
         pager.setCurrentItem(1);
-
-
-
-        // I create the ImageButton needed to switch to history page
-        ImageButton goHistory =  findViewById(R.id.GoHistory);
-        // The button to go in percentage history mood
-        Button goPiechart = findViewById(R.id.piechart_button);
-
-        // I call the method setOnClickListener to describe what happen when we press Gohistory button
-        // Listener object contain a method which will be call when event happen
-        goHistory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            // onClick method is called each time the user presses the button
-
-            //Here i use the method start activity to launch the activity
-            //The intent used to switch to an other activity
-                Intent HistoryIntent = new Intent(MainActivity.this,MHistoryMood.class);
-                startActivity(HistoryIntent);
-        }
-        });
-
-        goPiechart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent PiechartIntent = new Intent(MainActivity.this,PiechartHistory.class);
-                startActivity(PiechartIntent);
-            }
-        });
-
-
-      pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-          @Override
-          public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-          }
-
-          @Override
-          public void onPageSelected(int position) {
-
-              if(playMusic!=null)
-                  playMusic.stop(); user_scrolled = true;
-
-              get_current_mood();
-          }
-
-          @Override
-          public void onPageScrollStateChanged(int state) {
-
-          }
-      });
-        launcher_mood_data();
-
-        //If the user don't scroll
-        if(mood_name == null)
-        {
-            mood_Color="#65D164"; mood_name="Bonne humeur";
-            //and we update the key 0
-            launcher_mood_data();
-        }
-
-
-        //now i need to handle the button which have to record the possible comment of the user about his mood
-
-        ImageButton btAddComment = findViewById(R.id.AddComment);
-        btAddComment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final DialogComment dialogAddComment = new DialogComment(currentActivity);
-                dialogAddComment.getBtValidate().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //No need to use the setPositive or Negative method, cause i created my customized method
-                        // with my customized buttons
-
-                        Toast.makeText(getApplicationContext(),"Commentaire enregistré",Toast.LENGTH_SHORT).show();
-                        //I use cancel() method from dialog class to close the dialog box after a choice
-
-
-                        mood_sentence = dialogAddComment.getEtComment().getText().toString();
-                        if(mood_sentence==null)
-                        {
-                            mood_sentence="";
-                        }
-                        //else, If user wrote a comment i record this
-                        else
-                        {
-                            launcher_mood_data();
-                        }
-
-                        dialogAddComment.cancel();
-                    }
-                });
-                dialogAddComment.getBtCancel().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(),"Commentaire annulé",Toast.LENGTH_SHORT).show();
-                        dialogAddComment.cancel();
-                    }
-                });
-
-                dialogAddComment.show();
-            }
-        });
-        //<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        //Here i put the button to allow users to share their mood to other by sending their mood from the application
-        //with the intent way i will use Dialog.builder
-        ImageButton btShare = findViewById(R.id.ShareMood);
-        btShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final AlertDialog.Builder share_dialog = new AlertDialog.Builder(currentActivity);
-                share_dialog.setTitle("Partager votre humeur");
-                share_dialog.setMessage("Voulez vous partagez vos informations d'humeur avec vos connaissances ?");
-                share_dialog.setPositiveButton("OUI", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //Code about share operation
-                        Toast.makeText(getApplicationContext(),"Ouverture des applications suggérés pour l'envoie",Toast.LENGTH_SHORT).show();
-                        Intent sendIntent = new Intent();
-                        sendIntent.setAction(Intent.ACTION_SEND);
-
-                        String[] array_message = mood_manager.mood_ready_read(mood_manager.mood_list_data_gson_string());
-                        String message_send = "Salut ! "+array_message[1]+" aujord'hui. "+array_message[3];
-                        sendIntent.putExtra(Intent.EXTRA_TEXT, message_send);
-                        sendIntent.setType("text/plain");
-                        startActivity(sendIntent);
-
-                    }
-                }).setNegativeButton("NON", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                share_dialog.show();
-            }
-        });
+        //Prepare all the buttons needed and active the scroll listener of the mood
+        InitializeBehavior();
 
     }
+
+    /**
+     * This method construct in a right way the viewpager and set right the all the elements
+     */
     private void configureViewPager() {
 
         //i implement the color for the adapter
@@ -404,6 +273,145 @@ public class MainActivity extends AppCompatActivity{
             default: break;
         }
         launcher_mood_data();
+    }
+
+    public void InitializeBehavior()
+    {
+        // I create the ImageButton needed to switch to history page
+        ImageButton goHistory =  findViewById(R.id.GoHistory);
+        // The button to go in percentage history mood
+        Button goPiechart = findViewById(R.id.piechart_button);
+
+        // I call the method setOnClickListener to describe what happen when we press Gohistory button
+        // Listener object contain a method which will be call when event happen
+        goHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // onClick method is called each time the user presses the button
+
+                //Here i use the method start activity to launch the activity
+                //The intent used to switch to an other activity
+                Intent HistoryIntent = new Intent(MainActivity.this,MHistoryMood.class);
+                startActivity(HistoryIntent);
+            }
+        });
+
+        goPiechart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent PiechartIntent = new Intent(MainActivity.this,PiechartHistory.class);
+                startActivity(PiechartIntent);
+            }
+        });
+
+
+        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+                if(playMusic!=null)
+                    playMusic.stop(); user_scrolled = true;
+
+                get_current_mood();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        launcher_mood_data();
+
+        //If the user don't scroll
+        if(mood_name == null)
+        {
+            mood_Color="#65D164"; mood_name="Bonne humeur";
+            //and we update the key 0
+            launcher_mood_data();
+        }
+
+
+        //now i need to handle the button which have to record the possible comment of the user about his mood
+
+        ImageButton btAddComment = findViewById(R.id.AddComment);
+        btAddComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final DialogComment dialogAddComment = new DialogComment(currentActivity);
+                dialogAddComment.getBtValidate().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //No need to use the setPositive or Negative method, cause i created my customized method
+                        // with my customized buttons
+
+                        Toast.makeText(getApplicationContext(),"Commentaire enregistré",Toast.LENGTH_SHORT).show();
+                        //I use cancel() method from dialog class to close the dialog box after a choice
+
+
+                        mood_sentence = dialogAddComment.getEtComment().getText().toString();
+                        if(mood_sentence==null)
+                        {
+                            mood_sentence="";
+                        }
+                        //else, If user wrote a comment i record this
+                        else
+                        {
+                            launcher_mood_data();
+                        }
+
+                        dialogAddComment.cancel();
+                    }
+                });
+                dialogAddComment.getBtCancel().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getApplicationContext(),"Commentaire annulé",Toast.LENGTH_SHORT).show();
+                        dialogAddComment.cancel();
+                    }
+                });
+
+                dialogAddComment.show();
+            }
+        });
+        //<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        //Here i put the button to allow users to share their mood to other by sending their mood from the application
+        //with the intent way i will use Dialog.builder
+        ImageButton btShare = findViewById(R.id.ShareMood);
+        btShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AlertDialog.Builder share_dialog = new AlertDialog.Builder(currentActivity);
+                share_dialog.setTitle("Partager votre humeur");
+                share_dialog.setMessage("Voulez vous partagez vos informations d'humeur avec vos connaissances ?");
+                share_dialog.setPositiveButton("OUI", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Code about share operation
+                        Toast.makeText(getApplicationContext(),"Ouverture des applications suggérés pour l'envoie",Toast.LENGTH_SHORT).show();
+                        Intent sendIntent = new Intent();
+                        sendIntent.setAction(Intent.ACTION_SEND);
+
+                        String[] array_message = mood_manager.mood_ready_read(mood_manager.mood_list_data_gson_string());
+                        String message_send = "Salut ! "+array_message[1]+" aujord'hui. "+array_message[3];
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, message_send);
+                        sendIntent.setType("text/plain");
+                        startActivity(sendIntent);
+
+                    }
+                }).setNegativeButton("NON", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                share_dialog.show();
+            }
+        });
     }
 
 }

@@ -20,9 +20,15 @@ public class PiechartHistory extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
         setContentView(R.layout.activity_piechart);
+        //Prepare all the buttons needed and active the scroll listener of the mood
+        IntializeBehavior();
+
+
+    }
+
+    public void IntializeBehavior()
+    {
         PieChart piechart_history = findViewById(R.id.piechart_drawing);
         //i use the method which set the percentage format value
         piechart_history.setUsePercentValues(true);
@@ -30,9 +36,9 @@ public class PiechartHistory extends AppCompatActivity {
         //A description of the piechart to show
         Description mood_info = new Description();
         mood_info.setText("Niveau d'intentisé de chacune de vos humeurs sur les 7 derniers jours");
-        mood_info.setTextSize(13f);
+        mood_info.setTextSize(11f);
 
-                            //i add the description in the layout
+        //i add the description in the layout
         piechart_history.setDescription(mood_info);
 
         // i need take mood date from data file and put them all in an array
@@ -132,7 +138,5 @@ public class PiechartHistory extends AppCompatActivity {
 
         //We put the list in the view
         piechart_history.setData(mood_pie_data);
-
-
     }
 }
