@@ -35,10 +35,6 @@ public class MainActivity extends AppCompatActivity{
 
     final Mood mood_manager = new Mood();
 
-        //initialiser une liste 5 mood en faisant leur sélection via le scroll + compteur
-
-
-
     private MediaPlayer playMusic = null;
 
     //To record the user choice i make a string variable which have to be put in each case
@@ -52,10 +48,6 @@ public class MainActivity extends AppCompatActivity{
     //The following variable will be used to make dialog box exist
     private MainActivity currentActivity;
 
-    //a boolean to determinate if the user set mood or not in a day
-    // if not the app dont put a default value so boolean get true
-
-    boolean user_scrolled = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -315,7 +307,7 @@ public class MainActivity extends AppCompatActivity{
             public void onPageSelected(int position) {
 
                 if(playMusic!=null)
-                    playMusic.stop(); user_scrolled = true;
+                    playMusic.stop();
 
                 get_current_mood();
             }
@@ -378,7 +370,6 @@ public class MainActivity extends AppCompatActivity{
                 dialogAddComment.show();
             }
         });
-        //<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         //Here i put the button to allow users to share their mood to other by sending their mood from the application
         //with the intent way i will use Dialog.builder
         ImageButton btShare = findViewById(R.id.ShareMood);
@@ -413,5 +404,17 @@ public class MainActivity extends AppCompatActivity{
             }
         });
     }
+
+    /**
+     * To stop the music launched if activity isn't showed
+     */
+   @Override
+    protected void onPause()
+    {
+        super.onPause();
+        if(playMusic!=null)
+            playMusic.stop();
+    }
+
 
 }
