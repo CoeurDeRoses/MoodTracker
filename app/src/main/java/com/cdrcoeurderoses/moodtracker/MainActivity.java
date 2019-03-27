@@ -62,13 +62,17 @@ public class MainActivity extends AppCompatActivity{
         //setContentView(R.layout.activity_main);
 
         setContentView(R.layout.activity_main);
-
-
+        //Enable ViewPager to work
         this.configureViewPager();
-        //to set the happy mood as default smiley to be focused when app is open
-        pager.setCurrentItem(1);
+
+
+
+        //Here i set the actual mood of the day to the viewpager
+        ShowActualMood();
         //Prepare all the buttons needed and active the scroll listener of the mood
         InitializeBehavior();
+
+
 
     }
 
@@ -145,6 +149,7 @@ public class MainActivity extends AppCompatActivity{
 
         mood_manager.record_ManyData(mood_name,mood_sentence,mood_Color,string_mood_date);
 
+
         //Json way
         Gson gson_manager = new Gson();
         //for the file one
@@ -175,7 +180,6 @@ public class MainActivity extends AppCompatActivity{
          int number_days_gone = update_as_much_as_needed();
         if(number_days_gone>0)
         {
-            Toast.makeText(getApplicationContext(), "Date "+string_mood_date, Toast.LENGTH_LONG).show();
             // we must always start the process from the last-1 to the recent just before its data
             // and we repeat the same until the second i also code the deserealisation process first and
             // the serealisation process after
@@ -187,11 +191,15 @@ public class MainActivity extends AppCompatActivity{
 //if            the loop has more than one turn i set the code for set default value for the day mood wasn't choose
                 //and for each day past i add one unit to be sure to have the right day
                 if(j>0)
-                {   int current_date = j+Integer.parseInt(string_mood_date);
+
+                {
+                    mood_sentence="";
+                    int current_date = j+Integer.parseInt(string_mood_date);
                     mood_manager.record_ManyData("Bonne humeur", "", "#65D164", String.valueOf(current_date));
                     String default_mood = gson_manager.toJson(mood_manager.mood_list_data_gson_string());
                     //and record
                     mood_gson_Editor.putString("0", default_mood).apply();
+
                 }
 
                 for (int a = 7; a > 0; a--) {
@@ -232,7 +240,9 @@ public class MainActivity extends AppCompatActivity{
 
         mood_gson_Editor.putString("0", mood_data_gson).apply();
 
-        mood_sentence="";
+
+
+
     }
 
     public void get_current_mood()
@@ -414,6 +424,60 @@ public class MainActivity extends AppCompatActivity{
         super.onPause();
         if(playMusic!=null)
             playMusic.stop();
+    }
+
+    /**
+     * This method set the current mood to be showed of they day while user didn't changed the mood in the same day
+     */
+    public void ShowActualMood()
+    {
+        SharedPreferences gson_file = getSharedPreferences("mood_file", MODE_PRIVATE);
+
+        //If key 0 don't exist and it's first launch of app
+        if(!gson_file.contains("0"))
+        {
+            pager.setCurrentItem(1); get_current_mood();
+        }
+        //if key 0 exist i check about put default value or other values
+
+        else {
+
+            //if we change a day i set the defaut mood
+            int day_change = update_as_much_as_needed();
+            if(day_change>0)
+            {
+                pager.setCurrentItem(1);get_current_mood();
+            }
+
+            //if day_change=0 so if we didn't changed the day  
+            else{
+                Gson gson_manager = new Gson();
+                String gson_read_from_0 = getSharedPreferences("mood_file", MODE_PRIVATE).getString("0", "");
+                String mood_data_gson_superior_key = gson_manager.fromJson(gson_read_from_0, String.class);
+                String[] array_moodToShow = mood_manager.mood_ready_read(mood_data_gson_superior_key);
+                switch (array_moodToShow[5]) {
+                    case "#EAE108":
+                        pager.setCurrentItem(0); get_current_mood();
+                        break;
+                    case "#65D164":
+                        pager.setCurrentItem(1);get_current_mood();
+                        break;
+                    case "#2663EE":
+                        pager.setCurrentItem(2);get_current_mood();
+                        break;
+                    case "#6B6C6F":
+                        pager.setCurrentItem(3);get_current_mood();
+                        break;
+                    case "#D12A2B":
+                        pager.setCurrentItem(4);get_current_mood();
+                        break;
+                    default:
+                        pager.setCurrentItem(1);get_current_mood();
+                        break;
+                }
+
+            }
+        }
     }
 
 
