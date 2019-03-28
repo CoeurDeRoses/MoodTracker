@@ -29,33 +29,33 @@ public class PiechartHistory extends AppCompatActivity {
 
     public void IntializeBehavior()
     {
-        PieChart piechart_history = findViewById(R.id.piechart_drawing);
+        PieChart piechartHistory = findViewById(R.id.piechart_drawing);
         //i use the method which set the percentage format value
-        piechart_history.setUsePercentValues(true);
+        piechartHistory.setUsePercentValues(true);
 
         //A description of the piechart to show
-        Description mood_info = new Description();
-        mood_info.setText("Niveau d'intentisé de chacune de vos humeurs sur les 7 derniers jours");
-        mood_info.setTextSize(11f);
+        Description moodInfo = new Description();
+        moodInfo.setText("Niveau d'intentisé de chacune de vos humeurs sur les 7 derniers jours");
+        moodInfo.setTextSize(11f);
 
         //i add the description in the layout
-        piechart_history.setDescription(mood_info);
+        piechartHistory.setDescription(moodInfo);
 
         // i need take mood date from data file and put them all in an array
 
         Mood mood_manager = new Mood();
         Gson gson = new Gson();
-        String gson_file_read;
-        String mood_data_gson;
+        String gsonFileRead;
+        String moodDataGson;
 
-        String[][] array_many_gson = new String[7][];
+        String[][] arrayManyGson = new String[7][];
 
         int i=0;
         while(i<7) {
 
-            gson_file_read = getSharedPreferences("mood_file", MODE_PRIVATE).getString(String.valueOf(i+1), "");
-            mood_data_gson = gson.fromJson(gson_file_read, String.class);
-            array_many_gson[i] = mood_manager.mood_ready_read(mood_data_gson); i++;
+            gsonFileRead = getSharedPreferences("mood_file", MODE_PRIVATE).getString(String.valueOf(i+1), "");
+            moodDataGson = gson.fromJson(gsonFileRead, String.class);
+            arrayManyGson[i] = mood_manager.moodReadyRead(moodDataGson); i++;
         }
 
         //need to make a calcul, any time i find a relative color in a tab i add the value to relative variable
@@ -64,24 +64,24 @@ public class PiechartHistory extends AppCompatActivity {
         i=0;
         while (i<7){
 
-            if(array_many_gson[i][5].contentEquals("#EAE108"))
+            if(arrayManyGson[i][5].contentEquals("#EAE108"))
             {
                 yellow+=1;
 
             }
-            if(array_many_gson[i][5].contentEquals("#65D164"))
+            if(arrayManyGson[i][5].contentEquals("#65D164"))
             {
                 green+=1;
             }
-            if(array_many_gson[i][5].contentEquals("#2663EE"))
+            if(arrayManyGson[i][5].contentEquals("#2663EE"))
             {
                 blue+=1;
             }
-            if(array_many_gson[i][5].contentEquals("#6B6C6F"))
+            if(arrayManyGson[i][5].contentEquals("#6B6C6F"))
             {
                 grey+=1;
             }
-            if(array_many_gson[i][5].contentEquals("#D12A2B"))
+            if(arrayManyGson[i][5].contentEquals("#D12A2B"))
             {
                 red +=1;
             }
@@ -89,54 +89,54 @@ public class PiechartHistory extends AppCompatActivity {
         }
 
         //I select the number of total mood which exist in purpose to have have clear data, if a variable is superior than 0 that mean we can use its
-        float total_mood=0;
+        float totalMood=0;
 
         if(yellow>0)
         {
-            total_mood+=1;
+            totalMood+=1;
         }
 
         if(green>0)
         {
-            total_mood+=1;
+            totalMood+=1;
         }
         if(blue>0)
         {
-            total_mood+=1;
+            totalMood+=1;
         }
         if(grey>0)
         {
-            total_mood+=1;
+            totalMood+=1;
         }
         if(red>0)
         {
-            total_mood+=1;
+            totalMood+=1;
         }
 
         //after that i need to divide by the total of mood and multiply by 100 to get to percentage
-        float percent_yellow = (yellow*100f)/total_mood , percent_green= (green*100f)/total_mood,
-                percent_blue=(blue*100f)/total_mood, percent_grey=(grey*100f)/total_mood, percent_red= (red*100f)/total_mood;
+        float percentYellow = (yellow*100f)/totalMood , percentGreen= (green*100f)/totalMood,
+                percentBlue=(blue*100f)/totalMood, percentGrey=(grey*100f)/totalMood, percentRed= (red*100f)/totalMood;
 
 
         // i create a List of PieEntry which set the data in the piechart.
         List<PieEntry> list_percent = new ArrayList<>();
-        list_percent.add(new PieEntry(percent_yellow,"Super bonne"));
-        list_percent.add(new PieEntry(percent_green,"Bonne"));
-        list_percent.add(new PieEntry(percent_blue,"Normale"));
-        list_percent.add(new PieEntry(percent_grey,"Mauvaise"));
-        list_percent.add(new PieEntry(percent_red,"Très mauvaise"));
+        list_percent.add(new PieEntry(percentYellow,"Super bonne"));
+        list_percent.add(new PieEntry(percentGreen,"Bonne"));
+        list_percent.add(new PieEntry(percentBlue,"Normale"));
+        list_percent.add(new PieEntry(percentGrey,"Mauvaise"));
+        list_percent.add(new PieEntry(percentRed,"Très mauvaise"));
 
 
 
-        PieDataSet mood_data_set = new PieDataSet(list_percent,"");
+        PieDataSet moodDataSet = new PieDataSet(list_percent,"");
 
-        PieData mood_pie_data = new PieData(mood_data_set);
+        PieData moodPieData = new PieData(moodDataSet);
 
         //We put colors to make the view of each percentage data clear
-        mood_data_set.setColors(ColorTemplate.COLORFUL_COLORS);
+        moodDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
 
 
         //We put the list in the view
-        piechart_history.setData(mood_pie_data);
+        piechartHistory.setData(moodPieData);
     }
 }

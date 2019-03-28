@@ -1,24 +1,16 @@
 package com.cdrcoeurderoses.moodtracker;
 
 
-import android.support.v4.util.ArraySet;
-import android.support.v7.app.AppCompatActivity;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
-
 public class Mood {
     //this class handle all the property and method about the mood
 
-    private String mood_name;
-    private String mood_sentence;
+    private String moodName;
+    private String moodSentence;
     // i use the hexadecimal value to choose the right color and i will convert the value with the parse method
     // later in MHistoryMood class cause the setBackground method of a component accept only int value so the get method of color
     // will return an int value
-    private String mood_color;
-    private String mood_date;
+    private String moodColor;
+    private String moodDate;
 
 
 
@@ -27,37 +19,37 @@ public class Mood {
     }
 
 
-    public void setMood_name(String mood_name) {
-        this.mood_name = mood_name;
+    public void setMoodName(String moodName) {
+        this.moodName = moodName;
     }
 
 
-    public void setMood_sentence(String mood_sentence) {
-        this.mood_sentence = mood_sentence;
+    public void setMoodSentence(String moodSentence) {
+        this.moodSentence = moodSentence;
     }
 
 
-    public void setMood_color(String mood_color) {
-        this.mood_color = mood_color;
+    public void setMoodColor(String moodColor) {
+        this.moodColor = moodColor;
     }
 
-    public void setMood_date(String mood_date) {
-        this.mood_date = mood_date;
+    public void setMoodDate(String moodDate) {
+        this.moodDate = moodDate;
     }
 
     /**
      * here the method which record many data at same time by calling other method
-     * @param mood_name
-     * @param mood_sentence
-     * @param mood_color
-     * @param mood_date
+     * @param moodName
+     * @param moodSentence
+     * @param moodColor
+     * @param moodDate
      */
-    public void record_ManyData(String mood_name, String mood_sentence,String mood_color, String mood_date )
+    public void recordManyData(String moodName, String moodSentence, String moodColor, String moodDate )
     {
-        setMood_name(mood_name);
-        setMood_sentence(mood_sentence);
-        setMood_color(mood_color);
-        setMood_date(mood_date);
+        setMoodName(moodName);
+        setMoodSentence(moodSentence);
+        setMoodColor(moodColor);
+        setMoodDate(moodDate);
     }
 
     /**
@@ -65,39 +57,39 @@ public class Mood {
      * when i extract data
      * @return
      */
-    public String mood_list_data_gson_string()
+    public String moodListDataGsonString()
     {
-        String mood_list = "{";
+        String moodList = "{";
 
-        mood_list += "\"mood_name\":\""+ mood_name+"\",";
-        mood_list += "\"mood_sentence\":\""+ mood_sentence+"\",";
-        mood_list += "\"mood_color\":\""+ mood_color+"\",";
-        mood_list += "\"mood_date\":\""+ mood_date+"\"}";
+        moodList += "\"moodName\":\""+ moodName +"\",";
+        moodList += "\"moodSentence\":\""+ moodSentence +"\",";
+        moodList += "\"moodColor\":\""+ moodColor +"\",";
+        moodList += "\"moodDate\":\""+ moodDate +"\"}";
 
-        return mood_list;
+        return moodList;
     }
 
     /**
      * This method format the string to make him able to be managed and for handle data
      * to show them well in the mood history i delete many kind of char useless to show
-     * @param the_string
+     * @param theString
      * @return
      */
-    public String[] mood_ready_read(String the_string){
+    public String[] moodReadyRead(String theString){
 
         //Curly bracket deleted
-        the_string = the_string.replaceAll("\\{|\\}","");
+        theString = theString.replaceAll("\\{|\\}","");
         //quote
-        the_string = the_string.replaceAll("\"","");
+        theString = theString.replaceAll("\"","");
         // i replace all the comma by ":" to make this character the split parameter to create an array
-        the_string = the_string.replaceAll(",",":");
+        theString = theString.replaceAll(",",":");
         //I split all the data and put them in an array
-        String[] the_array_string = the_string.split(":");
+        String[] theArrayString = theString.split(":");
         // Data are recorded in the array in this way
-        // array[0] mood_name array[1] mood_name value. the exact same order of the data send by user after user select mood data
+        // array[0] moodName array[1] moodName value. the exact same order of the data send by user after user select mood data
         // and recorded in JSON file
 
-        return the_array_string;
+        return theArrayString;
     }
 
 
